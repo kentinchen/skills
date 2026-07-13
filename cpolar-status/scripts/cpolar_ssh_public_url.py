@@ -2,6 +2,43 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import argparse
+import yaml
+import os
+import getpass
+
+def get_auth_config_path():
+    home_dir = os.path.expanduser("~")
+    cpolar_dir = os.path.join(home_dir, ".cpolar")
+    return os.path.join(cpolar_dir, "auth.yaml")
+
+def read_auth_config():
+    config_path = get_auth_config_path()
+    if os.path.exists(config_path):
+        try:
+            with open(config_path, 'r', encoding='utf-8') as f:
+                config = yaml.safe_load(f)
+                if config and 'username' in config and 'password' in config:
+                    return config['username'], config['password']
+        except Exception as e:
+            pass
+    return None, None
+
+def save_auth_config(username, password):
+    config_path = get_auth_config_path()
+    cpolar_dir = os.path.dirname(config_path)
+    
+    if not os.path.exists(cpolar_dir):
+        os.makedirs(cpolar_dir)
+    
+    config = {
+        'username': username,
+        'password': password
+    }
+    
+    with open(config_path, 'w', encoding='utf-8') as f:
+        yaml.dump(config, f, default_flow_style=False, allow_unicode=True)
+    
+    return config_path
 
 # 登录cpolar dashboard
 def login_cpolar(username, password, debug=False):
@@ -170,35 +207,41 @@ def get_ssh_tunnel_url(session, debug=False):
     return None
 
 if __name__ == "__main__":
-    # 解析命令行参数
     parser = argparse.ArgumentParser(description='登录cpolar dashboard并获取ssh隧道URL')
     parser.add_argument('username', nargs='?', help='cpolar用户名')
     parser.add_argument('password', nargs='?', help='cpolar密码')
     parser.add_argument('-d', '--debug', action='store_true', help='打印详细信息')
     args = parser.parse_args()
     
-    # 设置debug模式
     debug = args.debug
     
-    # 获取用户名和密码
+    saved_username, saved_password = read_auth_config()
+    
     if args.username:
         username = args.username
+    elif saved_username:
+        username = saved_username
+        print(f"使用保存的用户名: {username}")
     else:
         username = input("请输入cpolar用户名: ")
     
     if args.password:
         password = args.password
+    elif saved_password:
+        password = saved_password
+        print("使用保存的密码")
     else:
-        password = input("请输入cpolar密码: ")
+        password = getpass.getpass("请输入cpolar密码: ")
     
-    # 登录
     session = login_cpolar(username, password, debug)
     
     if session:
-        # 获取ssh隧道URL
         ssh_url = get_ssh_tunnel_url(session, debug)
         if ssh_url:
             print(ssh_url)
+            if not saved_username:
+                config_path = save_auth_config(username, password)
+                print(f"凭据已保存到: {config_path}")
         else:
             if debug:
                 print("无法获取ssh隧道URL")
