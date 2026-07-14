@@ -112,14 +112,10 @@ def proxy_server(port, target_host, target_port):
     handle_client(client_socket)
     server.close()
 
-# 启动SSH动态代理（使用git-bash）
-def start_ssh_proxy(command, is_first_proxy=False):
+def start_ssh_proxy(command, is_first_proxy=False, dp1=20808):
     try:
-        # 使用git-bash启动SSH代理
         git_bash_path = r"C:\Program Files\Git\git-bash.exe"
-        # 构建完整的git-bash命令，确保路径被正确引用
         full_command = f'"{git_bash_path}" -c "ssh -o StrictHostKeyChecking=no -N {command}"'
-        # 在后台启动进程
         process = subprocess.Popen(
             full_command, 
             shell=True, 
@@ -130,13 +126,10 @@ def start_ssh_proxy(command, is_first_proxy=False):
         print(f"已启动代理: {full_command}")
         print(f"进程ID: {process.pid}")
         
-        # 等待几秒钟，检查进程是否还在运行
         import time
-        time.sleep(3)  # 增加等待时间
+        time.sleep(3)
         
-        # 检查进程状态
         if process.poll() is not None:
-            # 进程已经退出，获取错误信息
             stdout, stderr = process.communicate()
             print(f"代理进程已退出，退出码: {process.returncode}")
             if stdout:
@@ -145,16 +138,14 @@ def start_ssh_proxy(command, is_first_proxy=False):
                 print(f"错误输出: {stderr}")
             return None
         
-        # 对于第一个代理，检查端口是否正在监听
         if is_first_proxy:
-            time.sleep(2)  # 再等待一下确保端口已经开始监听
+            time.sleep(2)
             import subprocess as sp
-            result = sp.run('netstat -ano|findstr 20808', shell=True, capture_output=True, text=True)
+            result = sp.run(f'netstat -ano|findstr {dp1}', shell=True, capture_output=True, text=True)
             if 'LISTENING' in result.stdout:
-                print("第一个代理端口 20808 正在监听")
+                print(f"第一个代理端口 {dp1} 正在监听")
             else:
-                print("警告: 第一个代理端口 20808 未监听")
-                # 尝试获取更多错误信息
+                print(f"警告: 第一个代理端口 {dp1} 未监听")
                 stdout, stderr = process.communicate(timeout=5)
                 if stdout:
                     print(f"标准输出: {stdout}")
@@ -205,25 +196,21 @@ def python_nc(host, port):
         if 'sock' in locals():
             sock.close()
 
-# 启动第二个代理（使用git-bash和原始的ProxyCommand命令）
-def start_second_proxy(host1, port1):
+def start_second_proxy(host1, port1, dp1=20808, dp2=20809):
     try:
         import tempfile
         import os
         
-        # 创建临时脚本文件
         with tempfile.NamedTemporaryFile(mode='w', suffix='.sh', delete=False) as f:
-            f.write(f'ssh -o "ProxyCommand connect -S 127.0.0.1:20808 %h %p" -D 20809 -p {port1} root@{host1}\n')
+            f.write(f'ssh -o "ProxyCommand connect -S 127.0.0.1:{dp1} %h %p" -D {dp2} -p {port1} root@{host1}\n')
             script_path = f.name
         
-        # 使用git-bash启动第二个代理
         git_bash_path = r"C:\Program Files\Git\git-bash.exe"
         full_proxy2_command = f'"{git_bash_path}" {script_path}'
-        proxy2_command = f'ssh -o "ProxyCommand connect -S 127.0.0.1:20808 %h %p" -D 20809 -p {port1} root@{host1} -i id_rsa'
+        proxy2_command = f'ssh -o "ProxyCommand connect -S 127.0.0.1:{dp1} %h %p" -D {dp2} -p {port1} root@{host1}'
         
         print(f"已启动第二个代理: {full_proxy2_command}")
         
-        # 启动SSH代理
         process = subprocess.Popen(
             full_proxy2_command,
             shell=True,
@@ -234,13 +221,10 @@ def start_second_proxy(host1, port1):
         
         print(f"进程ID: {process.pid}")
         
-        # 等待几秒钟，检查进程是否还在运行
         import time
-        time.sleep(10)  # 增加等待时间，确保第一个代理完全连接好
+        time.sleep(10)
         
-        # 检查进程状态
         if process.poll() is not None:
-            # 进程已经退出，获取错误信息
             stdout, stderr = process.communicate()
             print(f"代理进程已退出，退出码: {process.returncode}")
             if stdout:
@@ -249,14 +233,12 @@ def start_second_proxy(host1, port1):
                 print(f"错误输出: {stderr}")
             return None, full_proxy2_command
         
-        # 检查20809端口是否正在监听
         import subprocess as sp
-        result = sp.run('netstat -ano|findstr 20809', shell=True, capture_output=True, text=True)
+        result = sp.run(f'netstat -ano|findstr {dp2}', shell=True, capture_output=True, text=True)
         if 'LISTENING' in result.stdout:
-            print("第二个代理端口 20809 正在监听")
+            print(f"第二个代理端口 {dp2} 正在监听")
         else:
-            print("警告: 第二个代理端口 20809 未监听")
-            # 尝试获取更多错误信息
+            print(f"警告: 第二个代理端口 {dp2} 未监听")
             try:
                 stdout, stderr = process.communicate(timeout=5)
                 if stdout:
@@ -272,37 +254,40 @@ def start_second_proxy(host1, port1):
         return None, None
 
 if __name__ == "__main__":
-    # 解析命令行参数
-    parser = argparse.ArgumentParser(description='创建SSH动态代理')
+    parser = argparse.ArgumentParser(description='创建双层SSH动态代理')
     parser.add_argument('public_url', help='公网地址，格式: tcp://host:port')
+    parser.add_argument('host1', help='第二个代理的目标主机地址（必填）')
+    parser.add_argument('--port1', type=int, help='第二个代理的目标端口，默认22', default=22)
+    parser.add_argument('--dp1', type=int, help='第一个代理的本地监听端口，默认20808', default=20808)
+    parser.add_argument('--dp2', type=int, help='第二个代理的本地监听端口，默认20809', default=20809)
     args = parser.parse_args()
     
-    # 解析公网地址
     host, port = parse_tcp_url(args.public_url)
+    host1 = args.host1
+    port1 = args.port1
     
-    # 构建第一个代理命令
-    proxy1_command = f'-D 20808 -p {port} root@{host}'
-    full_proxy1_command = f'ssh -o StrictHostKeyChecking=no -N -D 20808 -p {port} root@{host}'
+    dp1 = args.dp1
+    dp2 = args.dp2
+    
+    proxy1_command = f'-D {dp1} -p {port} root@{host}'
+    full_proxy1_command = f'ssh -o StrictHostKeyChecking=no -N -D {dp1} -p {port} root@{host}'
     
     print("正在启动第一个代理...")
-    proxy1 = start_ssh_proxy(proxy1_command, is_first_proxy=True)
+    proxy1 = start_ssh_proxy(proxy1_command, is_first_proxy=True, dp1=dp1)
     
     if proxy1:
-        # 等待第一个代理完全连接好
         import time
         print("\n等待第一个代理完全连接...")
         time.sleep(5)
         
         print("\n正在启动第二个代理...")
-        host1 = "172.61.143.237"
-        port1 = 22
-        proxy2, full_proxy2_command = start_second_proxy(host1, port1)
+        proxy2, full_proxy2_command = start_second_proxy(host1, port1, dp1=dp1, dp2=dp2)
         
         if proxy2:
             print("\n所有代理已成功启动!")
             print("\n代理信息:")
-            print(f"1. 第一个代理 (本地端口 20808): {full_proxy1_command}")
-            print(f"2. 第二个代理 (本地端口 20809): {full_proxy2_command}")
+            print(f"1. 第一个代理 (本地端口 {dp1}): {full_proxy1_command}")
+            print(f"2. 第二个代理 (本地端口 {dp2}): {full_proxy2_command}")
             print("\n提示: 使用 Ctrl+C 停止脚本，代理进程将继续在后台运行")
             
             # 等待用户输入以保持脚本运行
