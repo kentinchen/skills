@@ -1,0 +1,221 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ocr",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/ocr": {
+      "post": {
+        "summary": "OCR 识别",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "format": "binary",
+                    "type": "string",
+                    "description": "图片文件（可选）",
+                    "example": "cmMtdXBsb2FkLTE3ODQwMzcxMTY0ODEtNw==/1.png"
+                  },
+                  "image": {
+                    "description": "Base64 编码的图片字符串（可选）",
+                    "example": "",
+                    "type": "string"
+                  },
+                  "probability": {
+                    "type": "boolean",
+                    "description": "是否返回概率（默认：false）",
+                    "example": ""
+                  },
+                  "charsets": {
+                    "description": "字符集（可选）",
+                    "example": "",
+                    "type": "string"
+                  },
+                  "png_fix": {
+                    "description": "是否进行 PNG 修复（默认：false）",
+                    "example": "",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "file"
+                ]
+              },
+              "example": {
+                "file": "cmMtdXBsb2FkLTE3ODQwMzcxMTY0ODEtNw==/1.png",
+                "image": "",
+                "probability": "",
+                "charsets": "",
+                "png_fix": ""
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 400,
+                  "message": "Either file or image must be provided",
+                  "data": null
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/slide_match": {
+      "post": {
+        "summary": "滑动验证码匹配",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "target_file": {
+                    "format": "binary",
+                    "type": "string",
+                    "description": "目标图片文件（可选）需要与target字段同时使用",
+                    "example": ""
+                  },
+                  "target": {
+                    "description": "Base64 编码的目标图片字符串（可选） 需要与target_file字段同时使用",
+                    "example": "",
+                    "type": "string"
+                  },
+                  "background_file": {
+                    "format": "binary",
+                    "type": "string",
+                    "description": "背景图片文件（可选） 需要与background字段同时使用",
+                    "example": ""
+                  },
+                  "background": {
+                    "description": "Base64 编码的背景图片字符串（可选） 需要与background_file字段同时使用",
+                    "example": "",
+                    "type": "string"
+                  },
+                  "simple_target": {
+                    "type": "boolean",
+                    "description": "是否使用简单目标（默认：false）",
+                    "example": ""
+                  }
+                }
+              },
+              "example": {
+                "target_file": "",
+                "target": "",
+                "background_file": "",
+                "background": "",
+                "simple_target": ""
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/detection": {
+      "post": {
+        "summary": "目标检测",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "format": "binary",
+                    "type": "string",
+                    "description": "图片文件（可选）",
+                    "example": ""
+                  },
+                  "image": {
+                    "description": "Base64 编码的图片字符串（可选）",
+                    "example": "",
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "file": "",
+                "image": ""
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "http://172.60.142.10:8000",
+      "description": "开发环境"
+    }
+  ],
+  "security": []
+}
