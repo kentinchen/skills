@@ -1,12 +1,12 @@
 ---
-name: cpolar-status
+name: cpolar-tunnel
 version: 1.0.0
 description: |
-  查询cpolar隧道信息并创建SSH代理。通过登录cpolar仪表盘获取SSH隧道公网地址，并创建动态代理实现网络穿透。
-  触发条件：当用户需要查看隧道状态、获取SSH隧道URL、创建代理连接时调用。
+  通过cpolar隧道创建SSH代理，支持单层和双层代理链。通过登录cpolar仪表盘获取SSH隧道公网地址，创建动态代理实现网络穿透。
+  触发条件：当用户需要查看隧道状态、获取SSH隧道URL、创建单层或双层代理连接时调用。
 ---
 
-# cpolar-status Skill
+# cpolar-tunnel Skill
 
 ## 前置条件
 
@@ -17,7 +17,7 @@ description: |
   ```
 - 用户已注册cpolar账号（用户名和密码）
 - cpolar客户端已配置authtoken并运行
-- 如需使用双层代理功能（proxy_manager.py），需安装 Git Bash
+- 如需使用双层代理功能（proxy_manager.py），需安装 Git Bash（路径：C:\Program Files\Git\git-bash.exe）
 
 ## 脚本说明
 
@@ -25,10 +25,10 @@ description: |
 登录cpolar官网仪表盘，提取SSH隧道的公网URL。支持自动保存和读取凭据到 `~/.cpolar/auth.yaml`。
 
 ### 2. dynamic_proxy_script.py
-根据TCP公网地址创建SSH动态SOCKS代理。支持自定义本地监听端口。
+根据TCP公网地址创建SSH动态SOCKS代理。支持自定义本地监听端口（默认20808）。
 
 ### 3. proxy_manager.py
-高级代理管理，创建双层SSH代理链（需Git Bash）。
+高级代理管理，创建双层SSH代理链。第一层代理直接连接cpolar隧道（端口20808），第二层代理通过第一层代理连接（端口20809），提供额外的代理层。
 
 ## 工作流程
 
@@ -61,7 +61,7 @@ python scripts/cpolar_ssh_public_url.py [username] [password]
 
 ### Phase 2: 创建SSH动态代理
 
-**方式一：使用 dynamic_proxy_script.py**
+**方式一：使用 dynamic_proxy_script.py（单层代理）**
 
 ```bash
 python scripts/dynamic_proxy_script.py tcp://host:port [local_port]
@@ -71,7 +71,7 @@ python scripts/dynamic_proxy_script.py tcp://host:port [local_port]
 - `tcp://host:port` - 公网地址，必填
 - `local_port` - 本地监听端口，可选，默认20808
 
-**方式二：使用 proxy_manager.py（双层代理）**
+**方式二：使用 proxy_manager.py（双层代理链）**
 
 ```bash
 python scripts/proxy_manager.py tcp://host:port
@@ -80,6 +80,7 @@ python scripts/proxy_manager.py tcp://host:port
 **执行要求：**
 - 将 `tcp://host:port` 替换为Phase 1获取的SSH隧道地址
 - proxy_manager.py 需要 Git Bash 支持
+- 双层代理结构：应用 → 127.0.0.1:20809 → 127.0.0.1:20808 → cpolar隧道 → 目标网络
 
 ### Phase 3: 解析输出
 
@@ -142,6 +143,32 @@ python scripts/dynamic_proxy_script.py tcp://abc123.cpolar.io:12345 8888
 SSH动态代理已在后台启动
 ```
 
+**创建双层SSH代理链：**
+```bash
+python scripts/proxy_manager.py tcp://abc123.cpolar.io:12345
+```
+
+**输出示例：**
+```
+正在启动第一个代理...
+已启动代理: "C:\Program Files\Git\git-bash.exe" -c "ssh -o StrictHostKeyChecking=no -N -D 20808 -p 12345 root@abc123.cpolar.io"
+进程ID: 2764
+第一个代理端口 20808 正在监听
+
+等待第一个代理完全连接...
+
+正在启动第二个代理...
+已启动第二个代理: "C:\Program Files\Git\git-bash.exe" temp_script.sh
+进程ID: 37044
+第二个代理端口 20809 正在监听
+
+所有代理已成功启动!
+
+代理信息:
+1. 第一个代理 (本地端口 20808): ssh -o StrictHostKeyChecking=no -N -D 20808 -p 12345 root@abc123.cpolar.io
+2. 第二个代理 (本地端口 20809): ssh -o "ProxyCommand connect -S 127.0.0.1:20808 %h %p" -D 20809 -p 12345 root@abc123.cpolar.io
+```
+
 ## 注意事项
 
 - 用户名和密码是敏感信息，请勿泄露
@@ -151,6 +178,7 @@ SSH动态代理已在后台启动
 - proxy_manager.py 需要安装 Git Bash（路径：C:\Program Files\Git\git-bash.exe）
 - 默认代理端口：20808（单层），20808/20809（双层）
 - 可使用 `-d` 参数启用debug模式查看详细日志
+- 双层代理链使用方法：将SOCKS5代理设置为 127.0.0.1:20809
 
 ## 错误处理
 
@@ -162,3 +190,4 @@ SSH动态代理已在后台启动
 | 未找到SSH隧道 | 提示用户先在cpolar仪表盘创建SSH隧道 |
 | SSH连接失败 | 提示用户检查网络连接或隧道状态 |
 | Git Bash未安装 | 提示用户安装Git或使用dynamic_proxy_script.py |
+| 双层代理启动失败 | 检查第一层代理是否正常运行，确保端口20808已监听 |

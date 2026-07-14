@@ -206,13 +206,20 @@ def python_nc(host, port):
             sock.close()
 
 # 启动第二个代理（使用git-bash和原始的ProxyCommand命令）
-def start_second_proxy():
+def start_second_proxy(host1, port1):
     try:
+        import tempfile
+        import os
+        
+        # 创建临时脚本文件
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.sh', delete=False) as f:
+            f.write(f'ssh -o "ProxyCommand connect -S 127.0.0.1:20808 %h %p" -D 20809 -p {port1} root@{host1}\n')
+            script_path = f.name
+        
         # 使用git-bash启动第二个代理
         git_bash_path = r"C:\Program Files\Git\git-bash.exe"
-        # 构建第二个代理命令，使用connect命令
-        proxy2_command = f'ssh -o "ProxyCommand connect -S 127.0.0.1:20808 %h %p" -D 20809 root@172.61.143.237'
-        full_proxy2_command = f'"{git_bash_path}" -c "{proxy2_command}"'
+        full_proxy2_command = f'"{git_bash_path}" {script_path}'
+        proxy2_command = f'ssh -o "ProxyCommand connect -S 127.0.0.1:20808 %h %p" -D 20809 -p {port1} root@{host1} -i id_rsa'
         
         print(f"已启动第二个代理: {full_proxy2_command}")
         
@@ -287,7 +294,9 @@ if __name__ == "__main__":
         time.sleep(5)
         
         print("\n正在启动第二个代理...")
-        proxy2, full_proxy2_command = start_second_proxy()
+        host1 = "172.61.143.237"
+        port1 = 22
+        proxy2, full_proxy2_command = start_second_proxy(host1, port1)
         
         if proxy2:
             print("\n所有代理已成功启动!")
