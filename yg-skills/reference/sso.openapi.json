@@ -1,0 +1,923 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/verify-server/kaptcha/generate": {
+      "get": {
+        "summary": "验证码生成",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "_t",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "1784045070740",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authentication",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Sec-Fetch-Storage-Access",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "active",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Request-With",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "XMLHttpRequest",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "examples": {}
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "resp_code": {
+                      "type": "integer"
+                    },
+                    "resp_msg": {
+                      "type": "string"
+                    },
+                    "datas": {
+                      "type": "object",
+                      "properties": {
+                        "image": {
+                          "type": "string"
+                        },
+                        "picCodeId": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "image",
+                        "picCodeId"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "resp_code",
+                    "resp_msg",
+                    "datas"
+                  ]
+                },
+                "example": {
+                  "resp_code": 200,
+                  "resp_msg": "生成图形验证码成功！",
+                  "datas": {
+                    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIIAAAAwCAIAAABSYzXUAAAPjUlEQVR42u1aB1RUxxrGlmhMYoymvJfyNOpL8qJ5yRMQBRQU6xFsaNRgLLFgwSCKsaGxEEVERKVKLyIsCiIoTboiwgKL9N6XIr0uyzLvn53L3bsLu4t5yUneOTvnP3tmh2H2zvfNX+cqIUX7CzQlBQQKGhRNQYOCBkVT0KCgQdEUNChoUDQFDQoaFO2vSIOgq+uPWrq3DVVH488/u7X0oNAilFCJatp/Vxqa2zo5BZWRyTkRz3Kyiqv7+/tfAffu7sbQ0CJTU87SpVnr1qXPn19haYkEgt9nx309qD4FFbNQ1EbkMg45KiG3CSj9EkL9v229xtaO//2hNL2R0kVKPrFFex6hp1W/lQbAOpadv9/i9swNv4xQ3qM0ezct7+kcPuv0oKunV+7SL0NC0hcsSJ09m0jmihWkU2xqSiY0RUbmbN5c6+0t6Ol5tb1yE1H4GuQyHkM/WHJvvdJisFmPkKSFhlc/WHzkhl+0tGn8PsFNv5hjN+61dXZLm/OkiiLgtcsiMkA0vFBi5SvSEJr4AtBnQj9YZhuYNzTL0brcrVsB9Nxt22qcnDqzs9s5HJqS7rIyfmsrKAfNEFAyXNh6mpDrWxTiTiOR73QUvgqlXUAek6jBgG+GzwHsYrnRdXpfo1QMQe8HTyusqFPZ8iuZo7zFXBoTptEY9PFXUBcfcTuQdxZa5odGCJmAT9CMbr5wXicXCfiyaDhqc5d+pvm7LK19okAtahpa4PiDpOdX/HTFD54V/qq1+4psAwW2CCDmurlR1ru+nqYBNKDa0RE6YKkyFi8mgyXHj/fzePKRSzPHWPt9jmpiEZ/hbFJOixQC/jSMBsZ2iu5xstnvjjuNmbMXOpMXmVTUNjGnBcVmTFjwE/MUAnMCwRB7n+OBEd8YRH3l9eHPzHqkF0CphYprb2P8CeQ8FuU6S6Xhdthz+I2xc/cbW/llF9eIznUpNyo5lz7+gTHpI1WwpWJFsWVskgCdt2uXCEBNTYJ47vbtnGXLoNMUFcVvaio8dIiix8NDPnj+/8JAs89hH1AVidhnUXkIHu+upzwESJiu3GXgeL2leRB28frcfVd9sC6edw4lKMMJIyjD50nbINos773os8zIhvTNXR5Kuqp+NNYSY31HqE6cOjTGAun4oqwG/PUup/lty27MhOXzboex6KmxVBrWmtqT3wDQsdNv77Lyjpyx5hQZBHpc7z8hM7eYucLI6sN2snx7TAwgy1ZTo01/7pYttEKAcJYv7+/DB6bOz4+MZK1fLwe8tlIKaG4Cit9D9T3fRwKhGtEjII0c2St9uOQIbGHWd2eLqxrISDeP97HeIbJZlePbrePsdPZZka/AhIVHGPZnrZ2f6Z0g5EkoTc5L6siXtQjtSgztJ/ov3wnsdx6XaTdr4qUmGDEOqZflG/6xktLQ6atPnXEMfkfLWMIlgNqCZsDMB/Ec+PrR8qMy9smrribgtqWmkpFKKysmDVxXVzIOGkNG2HPnyqGhwAtDfGs06qoVc9GVEcJosQB7CzIS84OMZQBNsqNpq052dFGnxD3dfen1reTsv6l5YNKS/WTOa2r7wE7Q/wuOmozb+scw1/TJxqBPtBbutA2NvCTmpb+/6t0XvjaIXQL9UZdQUbN0Gn447SrbM4OQWCIjvxL6b6gfkA1aurY2E+6WhASagzQNDfDSmK26ulQVFTKYt3OnHBoSDDHErFnY+jOjo9Qz1ASIoMjIrddQV51Ug1nfTO/IwMyFDC7xWhJbGrvrghdzv2M194D5ov/xTngK6AH502FrFnPNI0L/vMgXoY5K5wcPaQI+tqgiHVNhFKbijvtHoqXTANYfDrhsGpzuxcNM56BEojSyQcvfuxfALTUzo9OItHnzCOKV1tZU8OnqKnLdXl5yaGDNxBDH7kAFnmI05DhQE2qfigYhfJLSINwggQYRS89wGJztOJvXx4M8CSJXMj511TFt2zX0f0HAwgzfd573ZK65wLsP8D3qfAd+2sDKi6ZBzZ0P8RJ0wFU0dKErybj/uaPMgLWkuuH9xYdphQVHlF9eW1BeR0be1T4E6gzTVH/4dfBzDG5VNjYAbo6BgSh8MjGBkYxFi4gqgBPM1NWlaFBW5nG5spbjNSPHEcLMwBmnDrg/AgXPR4XeYilb0DyKBu+PJeJCZtPZa00DChHHoydZWm5abbw2YnJHqxquMrENynxk9NCIzP/5+l2JEwnGg3qqQm9+5PfjL3UAvqwb+hAIfWrVwLRIEMKSjkM6ii6j+vWdMvOGi26PQDHBS5N4FNKW9T87Ejd1LzoNRsKeZpHneJ5dKpuGpogIbH/U1dFAaNscHQ0mqCU+njJTT57QqpC3fbscVYCIiODbnCd01yU4AAcCgJKaONG00kCRQhT7SVssPq2AebQnLTy0m3UoKJcKNts7ezp7OzewNjwueQw47DH3HmwYLluYoRAd7KgclZLtVAm4lWm+nOpOJgeTron6xlE4cCL94MJhFzPAfa04eJ1wYB8QR1iB3A1GgBv5mVZVFYG4p6JioL4h6OCIYhjIFWga6lksOcslH8fIev1tYCketkV3ZggRH4GDVyotFqA7/6RoCJwjY71TdkFMWFcdswaFcElzAQLSuembAjZZJFrAtENW/oM5UF+h12M3iooXQnTMg5IA2an2eNmTcWLOGXD/xJbqQ0oBgSzpn0kYHg2QOpJ0GlyxfyQV7ZjaBMDIRG1jiXBNWstYuBAgbgwNHfKvtEWCGIkyUzLafU287cebcL+1CGdwTPcQupQRPDqKxquk5ueQFmjutCSwghUCWwQuGtAHJwGfDwtxZlBZnDmYA62VK1sc30PRBtge9uJ0auFtjOwO4S5nOIg4+Fro/sEWka+GYehhMdXfGjIMGooq60lkDWFyZmEVeWjaPgY8Zg+zWlBw4ACgXHbu3ND1yPj47I0bcQ6xdCmojswyIQ8nn9gxOAnLN0aSpSQIjXoH6it93TiZIOPgKqQ0t+AnEIySlAhSZZEHAusH7v3RSuQxGVbQ19dhcmBkeoRXnchcp5tPJW5eWSijTkwVfhbGtGm1It9wMYnqr74rj4baxtapujhJAVf8sgXXHeFz8T5r4s0gcB5+0aba1hZXjXTF0tqm8HDwChRi7e2kngFMdJeUSF2IDoFADyQyNfeJVKea8WCQZouyivDB611woXLmiVoH4gOv4LT24TLk9aEkux6TG+6t/VDbkKRsfhEpg5eKLKWQrWmXtEgJwoqeXRr1NZWLdFlUXz9QJg11jW3EFqnvsCA1rLyyWsIKyG5zr8CYdCLhSdncl3IsSXNsLOUeysupY93Tw4ZEQVnZaVuwuTmKiUGtz56xVVVxBKWj011WJsW6WWBQfD4d8LB7RErwMoPqcywZVGeJoAwSZoXdDaguCRXdgZN++cwuKhrU3ph3+R0x3N3eafGfn33PBJUEQAZAAZ2cQ/y5b/jzwY92TJgwfyUs7H7hJOLgo5tI0I+e16C3r+Kvmt6IL6D6IAcipNPQWJr01SqcPKttPtFWmYzaSjtaG2UkE/BwEFbJuo8ZqOjVBwTQg89UNbA/UFFJ90w4fx7l5uLKB6k4vdDT6+sYqu4PgSnOjbdJ0gDSXoHc38Wd8NWoNhGfa9a/Rek0Ebrc5KhUffWNkcoUDQnnP0X3lPGynCtgi+rKsyGHgKgJlP60QzCzfkeKnuPm7U/Lq5B4NJKR/RSJcl+KqYJBMDoVh94QRqtvWqG8RhRRKvrrTbZ0GgwM95Lnu310OnloiAfmLF/9uupOaUxM0DDEe8h3xwIuCywDLdwEIJKzbAkuoJoexBUhoYQu+pHKpdXVS8LiL51rhsHOtJi0uWo4s7t8Fk+Dk0uvk3uLgjVyPUr9BYv/VyKIIXa6NWbouwdx84IRj9pYESY6VV+sO93Sjsu0WcXVkAaBkxCLnUxs6VJHL7/vm03ncU6newLCRRqx1h5cnABYQ4uQf64YDcyYNa4CF1z/4yYaTOVKoQESyFEqVChtbroWp6y3pyDXN6VtzNnkC5g5U0df9v6L1k3Dx1xrJj1Sf/A90XWQ1iy+zWjkoFSx7ROq5KfxtXxM5Qq46CB1zBB1MzEKCXrpAAkiPRrredstluy/JuNmBTwl+UePkCQyCDEVDdqjYuqep6MXXzOAxR/BIGDyNWQUge8eXnaJyt3kYq5fWhZdXNVA//ymE+J3WGBY4YTWp1DHU3j2ba6dg5mLDYxQ0hGs1yAQwz3QEsl9DSCSa/ylMEmeLXCfgnm9PaXZ+jNmja9g3ayi72bRXzPUv0U+U8TW8Z1KrDbWg5TTKEwPub3NKFqYo2w7qg9pBHiI8lBsoOgJoElJh5m7IQnpMAVixYLyOoCevnVglg9Ox2NYJ1xFni+oC4Z2Hk4Onlbh+h1gDfRYJaMProvpB8RLUosZkC5OXmRCfmnGmlO0Kw6O4zzlFJMyBrOddXoAM3X2WsspTqekEHw7MjOpHLUdJc7XZTJBC/jqloQEySX8vhSa/jXoxXXk+5nkwQfc4aQHfIP7t6fi62iaJJgMvr2zRjIDicuQDf1IFbGr37c0DzJT7qUHbOilwCXQ4IL7XXcPmT/FlLBykWM6+vEhetda0kaB627nyawpbT/rLuPhpq8+ZWDmctUnkhXFBnrAdGJt2CeHBkFnJ1tYQ4XgtTkurtrBId/QkD1QVS00Nqavqdlqas3RQ90GDzaMoFWRG6h+1k2hkS4kYf6Aw/g7HhdIvTMfsj4BAg7A51EyBOhq2y5Jw+HbzefpdV7Ui1mh4Yh/rry7aIhBh6+tRLaYucrNHnI2bx7y4JPLan5LS6WNDXTomwnJRhcnSN0iUh8lH6OOPDhn+oYHOuDPfKehbHucwcl+r0Mg2HzSWaw+scMiNPEFPaG+qY2+gJEQCKLETFwgBneeJzqbiNPp6Q7YJ4+xGJqDTfeH8UoAuK9pq06+Eg2Od+Pl0lAlTOKGlCx9/WEkgdHI+fWBC049xPpadOSrH//296YE/Wb298HirzW1j08rGCJXya8cr2EksV/InCQuovMb0Wgh6MDBlWTkl4uCCrDYp6EvncQ4UHbDrmJYb2aAL6JvNmQLmEtwDN08+S/LQMpWILx7ENMGFZW8nTuH8ARDv2+TLllEgq8w+Ae3oNgM+mYCkgY71tAvG9xIpcJWGQJ60NrzZ7+118/nV9vbZ2hrZ61dW3bhQlNEhPxanuSrQl24yOo2AQWqonwPGXcJv2/zj0yFhG71Ybv88lpZd1yNuJKh5YOD0XGW2GFAFAsB61xPdPgxYnP/Mi9PKpqCBgUNiqagQUGDoiloUNCgaAoaFDQomoKG/+v2X56ZH5CYCBTaAAAAAElFTkSuQmCC",
+                    "picCodeId": "f3d42eefe8d24d45b78a68f31c69d353"
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/sso-server/wmh/getLoginType": {
+      "get": {
+        "summary": "取登录类型",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "accountType",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "3",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appCode",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "2a06bab333f5257deb664b8b16a30f23",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_t",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "1784092268979",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authentication",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Sec-Fetch-Storage-Access",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "active",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Request-With",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "XMLHttpRequest",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "examples": {}
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "resp_code": {
+                      "type": "integer"
+                    },
+                    "resp_msg": {
+                      "type": "string"
+                    },
+                    "datas": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "resp_code",
+                    "resp_msg",
+                    "datas"
+                  ]
+                },
+                "example": {
+                  "resp_code": 200,
+                  "resp_msg": "success",
+                  "datas": [
+                    "zhdl"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/sso-server/getPublicKey": {
+      "get": {
+        "summary": "取公钥",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "_t",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "1784092268982",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authentication",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Sec-Fetch-Storage-Access",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "active",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Request-With",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "XMLHttpRequest",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "examples": {}
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "resp_code": {
+                      "type": "integer"
+                    },
+                    "resp_msg": {
+                      "type": "string"
+                    },
+                    "datas": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "resp_code",
+                    "resp_msg",
+                    "datas"
+                  ]
+                },
+                "example": {
+                  "resp_code": 200,
+                  "resp_msg": "success",
+                  "datas": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7EWwbNvNswNPHUkLTYzPqa72IIaAgqmHWmLRD1JJMVstOhUfA9/wJeFXPxFvRnDktETZzaJENwqOR50585VvqlbnZZB4ft6KSBByf7JTz6qxFzN/3ndMRDVzaa0ZCZG6KvEvd9rV9FX3spFTxRU66UEpLeVMrkw5D0AyAoNVApwIDAQAB"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/upms/sys/dict/selectByCode": {
+      "get": {
+        "summary": "代码选择",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "version",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_t",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "1784092268983",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authentication",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Sec-Fetch-Storage-Access",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "active",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Request-With",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "XMLHttpRequest",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "examples": {}
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "resp_code": {
+                      "type": "integer"
+                    },
+                    "resp_msg": {
+                      "type": "string"
+                    },
+                    "datas": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "dictName": {
+                          "type": "string"
+                        },
+                        "dictValue": {
+                          "type": "string"
+                        },
+                        "isFixed": {
+                          "type": "integer"
+                        },
+                        "isChild": {
+                          "type": "integer"
+                        },
+                        "descript": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "integer"
+                        },
+                        "pcode": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "code",
+                        "dictName",
+                        "dictValue",
+                        "isFixed",
+                        "isChild",
+                        "descript",
+                        "status",
+                        "pcode"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "resp_code",
+                    "resp_msg",
+                    "datas"
+                  ]
+                },
+                "example": {
+                  "resp_code": 200,
+                  "resp_msg": "success",
+                  "datas": {
+                    "id": "6bc297f5f8924956",
+                    "code": "version",
+                    "dictName": "公告栏配置",
+                    "dictValue": "",
+                    "isFixed": 0,
+                    "isChild": 1,
+                    "descript": "{\"visible\":false,\"title\":\"平台通知\",\"text\":\"尊敬的各位平台用户:兹定于2026年6月23日21:00至02:00，云服务商进行云硬件资源调整。期间会间接影响统一身份认证平台对外服务，我们将随时关注云平台资源调整进度，服务恢复后第一时间在本群通知，请大家保持关注~\"}",
+                    "status": 0,
+                    "pcode": "ywzd"
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/verify-server/kaptcha/getCode": {
+      "get": {
+        "summary": "取代码",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "picCodeId",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "193be360d2c742868df099758e55e663",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_t",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "1784045072925",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authentication",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Sec-Fetch-Storage-Access",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "active",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Request-With",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "XMLHttpRequest",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "examples": {}
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "resp_code": {
+                      "type": "integer"
+                    },
+                    "resp_msg": {
+                      "type": "string"
+                    },
+                    "datas": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "resp_code",
+                    "resp_msg",
+                    "datas"
+                  ]
+                },
+                "example": {
+                  "resp_code": 200,
+                  "resp_msg": "ok",
+                  "datas": "57ceee3fddab15b835259927b051c9d1"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/sso-server/wmh/Internal/users": {
+      "post": {
+        "summary": "登录",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "_t",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "1784047419284",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authentication",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Sec-Fetch-Storage-Access",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "active",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Request-With",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "XMLHttpRequest",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userName": {
+                    "type": "string"
+                  },
+                  "passWord": {
+                    "type": "string"
+                  },
+                  "imgCode": {
+                    "type": "string"
+                  },
+                  "picCodeId": {
+                    "type": "string"
+                  },
+                  "appCode": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "null"
+                  },
+                  "loginDeviceInfo": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "userName",
+                  "passWord",
+                  "imgCode",
+                  "picCodeId",
+                  "appCode",
+                  "state",
+                  "loginDeviceInfo"
+                ]
+              },
+              "example": {
+                "userName": "cLuhhyyEV2Kf6Ybc6Zf4R366WMbl1DbYlqXf/TJRqdYkBYHyqt1Pwkji01jm1gBVtJr5I3j2e7DLPRLhvvAQV76fWYFQkPIBgOB2zr5VNbZEj0J8I8m73OkskzofU8mONnOZgKDaQ0sQxmvIDUE3wWCaa6k1D67JGe0MZAvytr4=",
+                "passWord": "gpn2cwSFjmXs2aPDB54bqY60mXwI4GAwBVlVOtAn7IzSjCgBZ81mDvdWWZIk0Q3ARt4F9TA3DpHHnYnXSGseAYHXKuUXzzqj8OSMOEdY462qZxtoros01wZhZJDdL5vwsc5BAFCRGIq01+IZLRJ2rNUhsWX7oEqLwioTCaInMak=",
+                "imgCode": "hrahr",
+                "picCodeId": "193be360d2c742868df099758e55e663",
+                "appCode": "2a06bab333f5257deb664b8b16a30f23",
+                "state": null,
+                "loginDeviceInfo": "a8799d06d5e4b4bf4b8efe54b5086f7c"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/register-server/verify/passwordVerify": {
+      "get": {
+        "summary": "密码策略验证",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "accountType",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "3",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pwd",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "V1LAXwS%2BAwehT9tbWpv4IRpsP3JNEUpjso4sel1vgMcrmvb6woFIrS%2F394OpwG73MFnv6iyb9DVimsHNLiY%2FQvAQObprF9ETvbjS5z0MfJAhdz2xcCgXunY9zYl5b%2FB2rR6v7ml9AqOfozPshWkTjcn5wxsQhgBvEXrZ6eBzAxE%3D",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_t",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "1784092243460",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authentication",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Sec-Fetch-Storage-Access",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "active",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Request-With",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "XMLHttpRequest",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "examples": {}
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "resp_code": {
+                      "type": "integer"
+                    },
+                    "resp_msg": {
+                      "type": "string"
+                    },
+                    "datas": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "resp_code",
+                    "resp_msg",
+                    "datas"
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例",
+                    "value": {
+                      "resp_code": 200,
+                      "resp_msg": "密码策略验证通过！",
+                      "datas": true
+                    }
+                  },
+                  "2": {
+                    "summary": "成功示例",
+                    "value": {
+                      "resp_code": 200,
+                      "resp_msg": "密码策略验证通过！",
+                      "datas": true
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [],
+  "security": []
+}
