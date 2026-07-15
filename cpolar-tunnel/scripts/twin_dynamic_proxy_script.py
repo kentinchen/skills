@@ -4,6 +4,43 @@ import re
 import sys
 import socket
 import threading
+import yaml
+import os
+
+def get_servers_config_path():
+    home_dir = os.path.expanduser("~")
+    cpolar_dir = os.path.join(home_dir, ".cpolar")
+    return os.path.join(cpolar_dir, "servers.yaml")
+
+def read_servers_config():
+    config_path = get_servers_config_path()
+    if os.path.exists(config_path):
+        try:
+            with open(config_path, 'r', encoding='utf-8') as f:
+                config = yaml.safe_load(f)
+                if config and isinstance(config, dict):
+                    return config.get('host1'), config.get('port1', 22)
+        except Exception as e:
+            print(f"读取配置文件失败: {e}")
+    return None, None
+
+def save_servers_config(host1, port1):
+    config_path = get_servers_config_path()
+    cpolar_dir = os.path.dirname(config_path)
+    if not os.path.exists(cpolar_dir):
+        os.makedirs(cpolar_dir)
+    
+    config = {
+        'host1': host1,
+        'port1': port1
+    }
+    
+    try:
+        with open(config_path, 'w', encoding='utf-8') as f:
+            yaml.dump(config, f, default_flow_style=False, allow_unicode=True)
+        print(f"配置已保存到: {config_path}")
+    except Exception as e:
+        print(f"保存配置文件失败: {e}")
 
 # 解析公网地址，提取主机和端口
 def parse_tcp_url(url):
@@ -256,15 +293,35 @@ def start_second_proxy(host1, port1, dp1=20808, dp2=20809):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='创建双层SSH动态代理')
     parser.add_argument('public_url', help='公网地址，格式: tcp://host:port')
-    parser.add_argument('host1', help='第二个代理的目标主机地址（必填）')
-    parser.add_argument('--port1', type=int, help='第二个代理的目标端口，默认22', default=22)
+    parser.add_argument('host1', nargs='?', help='第二个代理的目标主机地址（可选，未提供时从配置文件读取或提示输入）')
+    parser.add_argument('--port1', type=int, help='第二个代理的目标端口（可选，未提供时从配置文件读取或使用默认值22）', default=None)
     parser.add_argument('--dp1', type=int, help='第一个代理的本地监听端口，默认20808', default=20808)
     parser.add_argument('--dp2', type=int, help='第二个代理的本地监听端口，默认20809', default=20809)
     args = parser.parse_args()
     
     host, port = parse_tcp_url(args.public_url)
-    host1 = args.host1
-    port1 = args.port1
+    
+    saved_host1, saved_port1 = read_servers_config()
+    
+    if args.host1:
+        host1 = args.host1
+    elif saved_host1:
+        host1 = saved_host1
+        print(f"使用保存的目标主机: {host1}")
+    else:
+        host1 = input("请输入第二个代理的目标主机地址: ")
+    
+    if args.port1 is not None:
+        port1 = args.port1
+    elif saved_port1:
+        port1 = saved_port1
+        print(f"使用保存的目标端口: {port1}")
+    else:
+        port_input = input("请输入第二个代理的目标端口（默认22）: ")
+        port1 = int(port_input) if port_input.strip() else 22
+    
+    if not args.host1 or args.port1 is None:
+        save_servers_config(host1, port1)
     
     dp1 = args.dp1
     dp2 = args.dp2

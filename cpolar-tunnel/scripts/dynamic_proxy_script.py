@@ -35,7 +35,7 @@ def create_ssh_proxy(tcp_address, local_port=20808):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2 or len(sys.argv) > 3:
-        print("用法: python proxy_script.py tcp://host:port [local_port]")
+        print("用法: python dynamic_proxy_script.py tcp://host:port [local_port]")
         print("参数说明:")
         print("  tcp://host:port    公网地址，必填")
         print("  local_port         本地监听端口，可选，默认20808")
