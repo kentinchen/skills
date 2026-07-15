@@ -81,6 +81,7 @@ def read_config():
                         return {
                             'username': config.get('username'),
                             'password': config.get('password'),
+                            'app_username': config.get('app_username'),
                             'sso_url': config.get('sso_url') or config.get('base_url'),
                             'app_url': config.get('app_url'),
                             'proxy': config.get('proxy'),
@@ -92,6 +93,7 @@ def read_config():
     return {
         'username': None,
         'password': None,
+        'app_username': None,
         'sso_url': None,
         'app_url': None,
         'proxy': None,
