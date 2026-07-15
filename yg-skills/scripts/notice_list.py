@@ -8,20 +8,16 @@ from yg_base import YgBase
 class NoticeList(YgBase):
     def get_notice_list(self, page_num=1, page_size=5, notice_type=1):
         app_url = self.get_app_url()
-
         url = f"{app_url}/prod-api/noToken/notice/mylist"
         params = {
             'pageNum': page_num,
             'pageSize': page_size,
             'noticeType': notice_type
         }
-
         headers = {
             'Content-Type': 'application/json'
         }
-
         result = self.call_api(url, method='get', headers=headers, params=params)
-
         if result:
             code = result.get('code')
             if code == 200:
@@ -33,7 +29,6 @@ class NoticeList(YgBase):
 
 def main():
     import argparse
-
     parser = argparse.ArgumentParser(description="通知清单查询脚本")
     parser.add_argument('--page-num', '--pageNum', type=int, default=1, help='页码')
     parser.add_argument('--page-size', '--pageSize', type=int, default=5, help='每页大小')
@@ -46,7 +41,6 @@ def main():
 
     print(f"查询通知清单: pageNum={args.page_num}, pageSize={args.page_size}, noticeType={args.notice_type}")
     result = notice_list.get_notice_list(args.page_num, args.page_size, args.notice_type)
-
     if result:
         print("\n通知清单查询结果:")
         print(result)

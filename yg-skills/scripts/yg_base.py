@@ -11,7 +11,7 @@ except ImportError:
 requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from sso_login import (
+from sso_utils import (
     DEFAULT_SSO_URL, DEFAULT_APP_URL, DEFAULT_APP_CODE, DEFAULT_LOGIN_DEVICE_INFO,
     read_config, read_ocr_config, get_timestamp, get_common_headers,
     get_public_key, get_captcha, rsa_encrypt, recognize_captcha, login
