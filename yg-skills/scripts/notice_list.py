@@ -21,11 +21,7 @@ _global_token = None
 _global_config = None
 
 def get_user_info_by_art(art):
-    global _global_config
-    
-    if _global_config is None:
-        _global_config = read_config()
-    
+    global _global_config   
     app_url = _global_config.get('app_url') or DEFAULT_APP_URL
     proxy = _global_config.get('proxy')
     
@@ -54,16 +50,12 @@ def get_user_info_by_art(art):
 def exchange_app_token(sso_token, username=None):
     global _global_config
     
-    if _global_config is None:
-        _global_config = read_config()
-    
     art = sso_token
     app_username = get_user_info_by_art(art)
     
     if not app_username:
         print(f"无法通过loginByArt获取userName，使用传入的username: {username}")
-        app_username = username
-    
+        app_username = username    
     if not app_username:
         print("错误: 缺少APP用户名")
         return None
@@ -77,8 +69,7 @@ def exchange_app_token(sso_token, username=None):
         'userName': app_username
     }
     
-    proxies = {"http": proxy, "https": proxy} if proxy else None
-    
+    proxies = {"http": proxy, "https": proxy} if proxy else None    
     try:
         response = requests.get(url, params=params, proxies=proxies, verify=False)
         result = response.json()
@@ -95,8 +86,7 @@ def exchange_app_token(sso_token, username=None):
         else:
             print(f"APP登录失败: {result.get('msg')}")
     except Exception as e:
-        print(f"APP登录异常: {e}")
-    
+        print(f"APP登录异常: {e}")    
     return None
 
 def sso_login(sso_url, username, password, proxy=None, app_code=DEFAULT_APP_CODE, login_device_info=DEFAULT_LOGIN_DEVICE_INFO, app_username=None):
@@ -114,8 +104,7 @@ def sso_login(sso_url, username, password, proxy=None, app_code=DEFAULT_APP_CODE
         print("验证码识别失败")
         return None
     
-    result = login(sso_url, username, password, img_code, pic_code_id, proxy, app_code, login_device_info)
-    
+    result = login(sso_url, username, password, img_code, pic_code_id, proxy, app_code, login_device_info)    
     if result and result.get('resp_code') == 200:
         datas = result.get('datas')
         print(f"登录成功，完整响应: {json.dumps(result, ensure_ascii=False, indent=2)}")
@@ -130,7 +119,7 @@ def sso_login(sso_url, username, password, proxy=None, app_code=DEFAULT_APP_CODE
                 print("无法获取APP token")
                 return art
             elif token:
-                print(f"获取到SSO token: {token[:20]}...")
+                print(f"获取到SSO token: {token}...")
                 app_token = exchange_app_token(token, app_username)
                 if app_token:
                     return app_token
@@ -143,8 +132,7 @@ def sso_login(sso_url, username, password, proxy=None, app_code=DEFAULT_APP_CODE
     return None
 
 def get_token(force_login=False, app_username=None):
-    global _global_token, _global_config
-    
+    global _global_token, _global_config    
     if not force_login and _global_token:
         return _global_token
     
@@ -159,8 +147,7 @@ def get_token(force_login=False, app_username=None):
     
     if not username or not password:
         print("错误: 配置文件中缺少用户名或密码")
-        sys.exit(1)
-    
+        sys.exit(1)    
     if not app_username:
         print("错误: 配置文件中缺少app_username")
         sys.exit(1)
@@ -172,11 +159,9 @@ def get_token(force_login=False, app_username=None):
     return _global_token
 
 def call_api(url, method='get', headers=None, params=None, json=None, proxy=None):
-    global _global_config
-    
+    global _global_config    
     if proxy is None:
-        proxy = _global_config.get('proxy')
-    
+        proxy = _global_config.get('proxy')    
     proxies = {"http": proxy, "https": proxy} if proxy else None
     
     try:
