@@ -313,11 +313,7 @@ def exchange_app_token(sso_token, username=None):
     return None
 
 def get_token(force_login=False, app_username=None):
-    global _global_token, _global_config
-    
-    if _global_config is None:
-        _global_config = read_config()
-    
+    global _global_token, _global_config   
     if not force_login and _global_token:
         return _global_token
     
@@ -332,27 +328,20 @@ def get_token(force_login=False, app_username=None):
     
     if not username or not password:
         print("错误: 配置文件中缺少用户名或密码")
-        sys.exit(1)
-    
+        sys.exit(1)    
     if not app_username:
         print("错误: 配置文件中缺少app_username")
         sys.exit(1)
     
     token = login(sso_url, username, password, proxy, app_code, login_device_info, app_username)
     if token:
-        _global_token = token
-    
+        _global_token = token    
     return _global_token
 
 def call_api(url, method='get', headers=None, params=None, json=None, proxy=None):
-    global _global_config
-    
-    if _global_config is None:
-        _global_config = read_config()
-    
+    global _global_config   
     if proxy is None:
-        proxy = _global_config.get('proxy')
-    
+        proxy = _global_config.get('proxy')    
     proxies = {"http": proxy, "https": proxy} if proxy else None
     
     try:
@@ -371,10 +360,6 @@ def call_api(url, method='get', headers=None, params=None, json=None, proxy=None
 
 def get_notice_list(page_num=1, page_size=5, notice_type=1, token_required=True, app_username=None):
     global _global_config
-    
-    if _global_config is None:
-        _global_config = read_config()
-    
     app_url = _global_config.get('app_url') or DEFAULT_APP_URL
     
     url = f"{app_url}/prod-api/noToken/notice/mylist"
@@ -382,84 +367,31 @@ def get_notice_list(page_num=1, page_size=5, notice_type=1, token_required=True,
         'pageNum': page_num,
         'pageSize': page_size,
         'noticeType': notice_type
-    }
-    
+    }    
     headers = {
         'Content-Type': 'application/json'
     }
-    
-    result = call_api(url, method='get', headers=headers, params=params)
-    
+
+    result = call_api(url, method='get', headers=headers, params=params)    
     if result:
         code = result.get('code')
-        if code == 401 and token_required:
-            print("token无效，重新登录...")
-            token = get_token(force_login=True, app_username=app_username)
-            if token:
-                headers['Authorization'] = f"Bearer {token}"
-                headers['Cookie'] = f"Admin-Token={token}"
-                result = call_api(url, method='get', headers=headers, params=params)
-    
-    return result
-
-def get_notice_list1(page_num=1, page_size=5, notice_type=1, token_required=True, app_username=None):
-    global _global_config
-
-    if _global_config is None:
-        _global_config = read_config()
-    app_url = _global_config.get('app_url') or DEFAULT_APP_URL
-    
-    url = f"{app_url}/prod-api/noToken/notice/mylist"
-    params = {
-        'pageNum': page_num,
-        'pageSize': page_size,
-        'noticeType': notice_type
-    }
-    
-    headers = {
-        'Content-Type': 'application/json'
-    }
-    
-    
-    #headers['Authorization'] = f"Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew"
-    #headers['Cookie'] = f"Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew"
-    
-    result = call_api(url, method='get', headers=headers, params=params)
-    
-    if result:
-        code = result.get('code')
-        if code == 401 and token_required:
-            print("token无效，重新登录...")
-            token = get_token(force_login=True, app_username=app_username)
-            if token:
-                headers['Authorization'] = f"Bearer {token}"
-                headers['Cookie'] = f"Admin-Token={token}"
-                result = call_api(url, method='get', headers=headers, params=params)
-    
-    return result
+        if code == 200:    
+            return result.get('msg')
+        else:
+            print(f"查询通知清单失败: {result.get('msg')}")
+    return None
 
 def main():
-    import argparse
-    
+    import argparse   
     parser = argparse.ArgumentParser(description="通知清单查询脚本")
     parser.add_argument('--page-num', '--pageNum', type=int, default=1, help='页码')
     parser.add_argument('--page-size', '--pageSize', type=int, default=5, help='每页大小')
     parser.add_argument('--notice-type', '--noticeType', type=int, default=1, help='通知类型: 普通公告1、安全情报2、资源变化')
-    parser.add_argument('--no-token', action='store_true', help='不使用token调用（noToken接口）')
-    parser.add_argument('--force-login', action='store_true', help='强制重新登录')
     parser.add_argument('--app-username', '--app_username', help='APP用户名（用于获取APP token，可能与SSO用户名不同）')
-    args = parser.parse_args()
+    args = parser.parse_args()   
     
-    global _global_config
-    _global_config = read_config()
-    
-    if args.force_login:
-        print("强制重新登录...")
-        #get_token(force_login=True, app_username=args.app_username)
-    
-    print(f"查询通知清单: pageNum={args.page_num}, pageSize={args.page_size}, noticeType={args.notice_type}")
-    
-    result = get_notice_list1(args.page_num, args.page_size, args.notice_type, not args.no_token, args.app_username)
+    print(f"查询通知清单: pageNum={args.page_num}, pageSize={args.page_size}, noticeType={args.notice_type}")    
+    result = get_notice_list(args.page_num, args.page_size, args.notice_type, not args.no_token, args.app_username)
     
     if result:
         print("\n通知清单查询结果:")
@@ -468,4 +400,5 @@ def main():
         print("\n查询失败")
 
 if __name__ == "__main__":
+    _global_config = read_config()    
     main()
