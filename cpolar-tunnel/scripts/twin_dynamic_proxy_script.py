@@ -309,7 +309,14 @@ if __name__ == "__main__":
         host1 = saved_host1
         print(f"使用保存的目标主机: {host1}")
     else:
-        host1 = input("请输入第二个代理的目标主机地址: ")
+        try:
+            host1 = input("请输入第二个代理的目标主机地址: ")
+            if not host1.strip():
+                print("错误: 目标主机地址不能为空")
+                sys.exit(1)
+        except EOFError:
+            print("错误: 非交互式环境下必须提供host1参数")
+            sys.exit(1)
     
     if args.port1 is not None:
         port1 = args.port1
@@ -317,8 +324,12 @@ if __name__ == "__main__":
         port1 = saved_port1
         print(f"使用保存的目标端口: {port1}")
     else:
-        port_input = input("请输入第二个代理的目标端口（默认22）: ")
-        port1 = int(port_input) if port_input.strip() else 22
+        try:
+            port_input = input("请输入第二个代理的目标端口（默认22）: ")
+            port1 = int(port_input) if port_input.strip() else 22
+        except EOFError:
+            port1 = 22
+            print(f"使用默认端口: {port1}")
     
     if not args.host1 or args.port1 is None:
         save_servers_config(host1, port1)
