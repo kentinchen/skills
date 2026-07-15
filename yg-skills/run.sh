@@ -27,3 +27,8 @@ python yg-skills/scripts/file_service.py --type resources --key "ResourcesUp" --
 
 # 查询账单系数
 python yg-skills/scripts/billing_service.py --cloud-supplier "chengyun" --time-tag "2026-07-15"
+
+# 查询用户画像
+python yg-skills/scripts/customer_service.py --type profile
+# 查询部门树
+python yg-skills/scripts/customer_service.py --type dept

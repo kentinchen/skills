@@ -21,7 +21,7 @@ class NoticeService(YgBase):
         if result:
             code = result.get('code')
             if code == 200:
-                return result.get('msg')
+                return result
             else:
                 print(f"查询通知清单失败: {result.get('msg')}")
         return None
@@ -74,7 +74,7 @@ def main():
         result = notice_list.get_notice_list(args.page_num, args.page_size, args.notice_type)
         if result:
             print("\n通知清单查询结果:")
-            print(result)
+            print(json.dumps(result, ensure_ascii=False, indent=2))
         else:
             print("\n查询失败")
 
