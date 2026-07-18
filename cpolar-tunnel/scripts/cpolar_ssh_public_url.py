@@ -1,10 +1,11 @@
-import requests
-from bs4 import BeautifulSoup
-import json
 import argparse
-import yaml
-import os
 import getpass
+import os
+
+import requests
+import yaml
+from bs4 import BeautifulSoup
+
 
 def get_auth_config_path():
     home_dir = os.path.expanduser("~")
@@ -19,7 +20,7 @@ def read_auth_config():
                 config = yaml.safe_load(f)
                 if config and 'username' in config and 'password' in config:
                     return config['username'], config['password']
-        except Exception as e:
+        except Exception:
             pass
     return None, None
 

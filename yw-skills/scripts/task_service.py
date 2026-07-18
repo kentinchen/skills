@@ -1,6 +1,6 @@
-import sys
-import os
 import json
+import os
+import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from yw_base import YwBase
@@ -62,10 +62,12 @@ def main():
     parser = argparse.ArgumentParser(description="yw系统工单服务")
     parser.add_argument('--type', choices=['todo_count', 'handled', 'action_map', 'history'],
                         default='todo_count', help='查询类型')
-    parser.add_argument('--view-id', '--viewId', default='MY_TODO', help='视图ID（待办工单用MY_TODO，已办工单用MY_HANDLER）')
+    parser.add_argument('--view-id', '--viewId', default='MY_TODO',
+                        help='视图ID（待办工单用MY_TODO，已办工单用MY_HANDLER）')
     parser.add_argument('--work-order-id', '--workOrderId', help='工单ID（查询处理记录时必填）')
     parser.add_argument('--current-node-id', '--currentNodeId', help='当前节点ID（查询处理记录时必填）')
-    parser.add_argument('--data-types', '--dataTypes', nargs='+', default=["approve", "modify", "history", "counterSigned"],
+    parser.add_argument('--data-types', '--dataTypes', nargs='+',
+                        default=["approve", "modify", "history", "counterSigned"],
                         help='数据类型（查询处理记录时使用，如approve modify history counterSigned）')
     args = parser.parse_args()
 
@@ -78,7 +80,7 @@ def main():
         if result:
             print("\n待办工单数量查询结果:")
             print(json.dumps(result, ensure_ascii=False, indent=2))
-            
+
             if 'data' in result:
                 count = result['data']
                 print(f"\n📊 未完成工单数: {count}")

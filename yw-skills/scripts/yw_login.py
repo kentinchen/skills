@@ -1,6 +1,6 @@
-import sys
-import os
 import json
+import os
+import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from yw_base import YwBase
@@ -12,7 +12,6 @@ from sso_utils import (
 
 
 def main():
-    parser = None
     import argparse
     parser = argparse.ArgumentParser(description="yw-skills SSO登录脚本")
     parser.add_argument('--proxy', help='代理地址')
@@ -124,11 +123,11 @@ def main():
 
     needs_save = False
     if (saved_config['username'] is None and username) or \
-       (saved_config['password'] is None and password) or \
-       (saved_config['sso_url'] is None and sso_url) or \
-       (saved_config['app_url'] is None and app_url) or \
-       (saved_config['app_code'] is None and app_code) or \
-       (saved_config['login_device_info'] is None and login_device_info):
+            (saved_config['password'] is None and password) or \
+            (saved_config['sso_url'] is None and sso_url) or \
+            (saved_config['app_url'] is None and app_url) or \
+            (saved_config['app_code'] is None and app_code) or \
+            (saved_config['login_device_info'] is None and login_device_info):
         needs_save = True
     else:
         for key in ['username', 'password', 'sso_url', 'app_url', 'proxy', 'app_code', 'login_device_info']:
@@ -149,7 +148,7 @@ def main():
     if token:
         print(f"\n✅ 登录成功！")
         print(f"   Token: {token}...")
-        
+
         result = {
             'success': True,
             'token': token,

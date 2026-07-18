@@ -1,7 +1,8 @@
-import requests
 import json
 import os
 import sys
+
+import requests
 
 try:
     import socks
@@ -13,8 +14,7 @@ requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from sso_utils import (
     DEFAULT_SSO_URL, DEFAULT_APP_URL, DEFAULT_APP_CODE, DEFAULT_LOGIN_DEVICE_INFO,
-    read_config, read_ocr_config, save_config, get_timestamp, get_common_headers,
-    get_public_key, get_captcha, rsa_encrypt, recognize_captcha, login
+    read_config, read_ocr_config, save_config, get_timestamp, get_captcha, recognize_captcha, login
 )
 
 
@@ -57,7 +57,7 @@ class YwBase:
 
     def get_app_url(self):
         return self._config.get('app_url') or DEFAULT_APP_URL
-    
+
     def get_cookie_header(self):
         cookie_parts = []
         if self._auth_token_key:
@@ -85,7 +85,6 @@ class YwBase:
         if self._tenant_code:
             headers['tenant-code'] = self._tenant_code
         return headers
-
 
     def exchange_app_token(self, art, sso_token, app_code=DEFAULT_APP_CODE):
         app_url = self.get_app_url()
@@ -169,10 +168,10 @@ class YwBase:
                 sso_token = datas.get('token')
                 art = datas.get('art')
                 self._user_id = datas.get('userId')
-                
+
                 if sso_token:
                     print(f"获取到SSO token: {sso_token}...")
-                    
+
                     print("4. 换取APP token...")
                     app_token = self.exchange_app_token(art, sso_token, app_code)
                     if app_token:
@@ -182,7 +181,7 @@ class YwBase:
                         current_config['user_id'] = self._user_id
                         save_config(current_config)
                         self._config = current_config
-                        
+
                         print(f"获取到userId: {self._user_id}")
                         return self._token
                     else:
@@ -248,7 +247,8 @@ class YwBase:
             if method.lower() == 'get':
                 response = self._session.get(url, headers=auth_headers, params=params, proxies=proxies, verify=False)
             elif method.lower() == 'post':
-                response = self._session.post(url, headers=auth_headers, params=params, json=json_data, proxies=proxies, verify=False)
+                response = self._session.post(url, headers=auth_headers, params=params, json=json_data, proxies=proxies,
+                                              verify=False)
             else:
                 print(f"不支持的HTTP方法: {method}")
                 return None

@@ -240,7 +240,6 @@ def login(sso_url, username, password, img_code, pic_code_id, proxy=None, app_co
         return None
 
 def main():
-    parser = None
     import argparse
     parser = argparse.ArgumentParser(description="SSO登录脚本")
     parser.add_argument('--proxy', help='代理地址')
