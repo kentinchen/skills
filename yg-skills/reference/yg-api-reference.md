@@ -4,39 +4,39 @@
 
 - **标题**: 默认模块
 - **版本**: 1.0.0
-- **描述**: 
+- **描述**:
 
 ## 接口列表
 
-| 序号 | 路径 | 方法 | 摘要 |
-|------|------|------|------|
-| 1 | /prod-api/resource/mes/vos | **GET** | 资源变化 |
-| 2 | /prod-api/system/notice/noToken/46f0e445b4aec2be0a473d4e37c5152e | **GET** | 通知详情 |
-| 3 | /prod-api/noToken/notice/mylist | **GET** | 通知清单 |
-| 4 | /prod-api/notice/user/list | **GET** | 用户通知 |
-| 5 | /prod-api/safe/notice/confirmCompleted | **GET** | 通知确认 |
-| 6 | /prod-api/logic/cloudSupplier/list | **GET** | 云商列表 |
-| 7 | /prod-api/homepage/supplier | **GET** | 云商资源 |
-| 8 | /prod-api/loginByArt | **GET** | 登录 |
-| 9 | /prod-api/loginByArtUserId | **GET** | 用户登录 |
-| 10 | /prod-api/randomImage | **GET** | 随机图片 |
-| 11 | /prod-api/noToken/loginApi | **POST** | API登录 |
-| 12 | /prod-api/logout | **POST** | 登出 |
-| 13 | /prod-api/task/taskTodoList | **POST** | 待办工单 |
-| 14 | /prod-api/task/taskDoneList | **GET** | 完成工单 |
-| 15 | /prod-api/logic/catalog/list | **GET** | 服务目录 |
-| 16 | /prod-api/cloud/disk/billing | **GET** | 帐单系数 |
-| 17 | /prod-api/system/UploadFile/list | **GET** | 文件列表 |
-| 18 | /prod-api/forFlies | **POST** | 文件资源 |
-| 19 | /prod-api/work/hint | **GET** | 提示 |
-| 20 | /prod-api/activiti/CloudUp/listBySelect/exAll | **GET** | 上云活动 |
-| 21 | /prod-api/activiti/CloudUp/listBySelect | **GET** | 客户列表 |
-| 22 | /prod-api/cloud/monitoring/host/overview/everyDayAccessTotal | **POST** | 每天统计 |
-| 23 | /prod-api/cloud/monitoring/host/overview/getAccessDataSourceOverview | **GET** | 监控概览 |
-| 24 | /prod-api/getInfo | **GET** | 取信息 |
-| 25 | /prod-api/getRouters | **GET** | 取菜单 |
-| 26 | /prod-api/system/user/profile | **GET** | 用户画像 |
-| 27 | /prod-api/system/dept/treeselect | **GET** | 部门 |
+| 序号 | 路径                                                                   | 方法       | 摘要    |
+|----|----------------------------------------------------------------------|----------|-------|
+| 1  | /prod-api/resource/mes/vos                                           | **GET**  | 资源变化  |
+| 2  | /prod-api/system/notice/noToken/46f0e445b4aec2be0a473d4e37c5152e     | **GET**  | 通知详情  |
+| 3  | /prod-api/noToken/notice/mylist                                      | **GET**  | 通知清单  |
+| 4  | /prod-api/notice/user/list                                           | **GET**  | 用户通知  |
+| 5  | /prod-api/safe/notice/confirmCompleted                               | **GET**  | 通知确认  |
+| 6  | /prod-api/logic/cloudSupplier/list                                   | **GET**  | 云商列表  |
+| 7  | /prod-api/homepage/supplier                                          | **GET**  | 云商资源  |
+| 8  | /prod-api/loginByArt                                                 | **GET**  | 登录    |
+| 9  | /prod-api/loginByArtUserId                                           | **GET**  | 用户登录  |
+| 10 | /prod-api/randomImage                                                | **GET**  | 随机图片  |
+| 11 | /prod-api/noToken/loginApi                                           | **POST** | API登录 |
+| 12 | /prod-api/logout                                                     | **POST** | 登出    |
+| 13 | /prod-api/task/taskTodoList                                          | **POST** | 待办工单  |
+| 14 | /prod-api/task/taskDoneList                                          | **GET**  | 完成工单  |
+| 15 | /prod-api/logic/catalog/list                                         | **GET**  | 服务目录  |
+| 16 | /prod-api/cloud/disk/billing                                         | **GET**  | 帐单系数  |
+| 17 | /prod-api/system/UploadFile/list                                     | **GET**  | 文件列表  |
+| 18 | /prod-api/forFlies                                                   | **POST** | 文件资源  |
+| 19 | /prod-api/work/hint                                                  | **GET**  | 提示    |
+| 20 | /prod-api/activiti/CloudUp/listBySelect/exAll                        | **GET**  | 上云活动  |
+| 21 | /prod-api/activiti/CloudUp/listBySelect                              | **GET**  | 客户列表  |
+| 22 | /prod-api/cloud/monitoring/host/overview/everyDayAccessTotal         | **POST** | 每天统计  |
+| 23 | /prod-api/cloud/monitoring/host/overview/getAccessDataSourceOverview | **GET**  | 监控概览  |
+| 24 | /prod-api/getInfo                                                    | **GET**  | 取信息   |
+| 25 | /prod-api/getRouters                                                 | **GET**  | 取菜单   |
+| 26 | /prod-api/system/user/profile                                        | **GET**  | 用户画像  |
+| 27 | /prod-api/system/dept/treeselect                                     | **GET**  | 部门    |
 
 ---
 
@@ -52,21 +52,21 @@
 
 **查询参数**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| time | string | True | 2026-07-06--2026-07-12 |  |
-| supplier | string | True | H3C_outside |  |
+| 参数名      | 类型     | 必填   | 示例                     | 描述 |
+|----------|--------|------|------------------------|----|
+| time     | string | True | 2026-07-06--2026-07-12 |    |
+| supplier | string | True | H3C_outside            |    |
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -2359,13 +2359,13 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
+| 参数名    | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|--------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -2402,15 +2402,15 @@
 
 **查询参数**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| pageNum | string | True | 1 |  |
-| pageSize | string | True | 5 |  |
-| noticeType | string | True | 1 | 普通公告1、安全情报2、资源变化 |
+| 参数名        | 类型     | 必填   | 示例 | 描述               |
+|------------|--------|------|----|------------------|
+| pageNum    | string | True | 1  |                  |
+| pageSize   | string | True | 5  |                  |
+| noticeType | string | True | 1  | 普通公告1、安全情报2、资源变化 |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -2454,14 +2454,14 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -2485,14 +2485,14 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -2521,14 +2521,14 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -2549,21 +2549,21 @@
 
 **查询参数**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| supplierCode | string | True | chengyun |  |
-| dateOffset | string | True | 7 |  |
+| 参数名          | 类型     | 必填   | 示例       | 描述 |
+|--------------|--------|------|----------|----|
+| supplierCode | string | True | chengyun |    |
+| dateOffset   | string | True | 7        |    |
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -2727,13 +2727,13 @@
 
 **查询参数**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| art | string | True | 7c8acf7ca0fe4715a49b103dc3b6dda3 |  |
+| 参数名 | 类型     | 必填   | 示例                               | 描述 |
+|-----|--------|------|----------------------------------|----|
+| art | string | True | 7c8acf7ca0fe4715a49b103dc3b6dda3 |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -2766,14 +2766,14 @@
 
 **查询参数**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| art | string | True | 7c8acf7ca0fe4715a49b103dc3b6dda3 |  |
-| userName | string | True | chengyun_user |  |
+| 参数名      | 类型     | 必填   | 示例                               | 描述 |
+|----------|--------|------|----------------------------------|----|
+| art      | string | True | 7c8acf7ca0fe4715a49b103dc3b6dda3 |    |
+| userName | string | True | chengyun_user                    |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -2794,7 +2794,7 @@
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -2819,9 +2819,9 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Content-Type | string | True | application/json;charset=UTF-8 |  |
+| 参数名          | 类型     | 必填   | 示例                             | 描述 |
+|--------------|--------|------|--------------------------------|----|
+| Content-Type | string | True | application/json;charset=UTF-8 |    |
 
 #### 请求体
 
@@ -2867,7 +2867,7 @@
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -2891,14 +2891,14 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -2919,11 +2919,11 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
-| Content-Type | string | True | application/json;charset=UTF-8 |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew      |    |
+| Content-Type  | string | True | application/json;charset=UTF-8                                                                                                                                                                       |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |    |
 
 #### 请求体
 
@@ -2969,7 +2969,7 @@
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -2996,21 +2996,21 @@
 
 **查询参数**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| pageNum | string | True | 1 |  |
-| pageSize | string | True | 10 |  |
+| 参数名      | 类型     | 必填   | 示例 | 描述 |
+|----------|--------|------|----|----|
+| pageNum  | string | True | 1  |    |
+| pageSize | string | True | 10 |    |
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -3068,22 +3068,22 @@
 
 **查询参数**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| pageNum | string | True | 1 |  |
-| pageSize | string | True | 999 |  |
-| searchValue | string | True | %E5%AD%98%E5%82%A8 |  |
+| 参数名         | 类型     | 必填   | 示例                 | 描述 |
+|-------------|--------|------|--------------------|----|
+| pageNum     | string | True | 1                  |    |
+| pageSize    | string | True | 999                |    |
+| searchValue | string | True | %E5%AD%98%E5%82%A8 |    |
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -3147,23 +3147,23 @@
 
 **查询参数**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| pageNum | string | True | 1 |  |
-| pageSize | string | True | 10 |  |
-| cloudSupplier | string | True | chengyun |  |
-| timeTag | string | True | 2026-07-15 |  |
+| 参数名           | 类型     | 必填   | 示例         | 描述 |
+|---------------|--------|------|------------|----|
+| pageNum       | string | True | 1          |    |
+| pageSize      | string | True | 10         |    |
+| cloudSupplier | string | True | chengyun   |    |
+| timeTag       | string | True | 2026-07-15 |    |
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -3201,22 +3201,22 @@
 
 **查询参数**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
+| 参数名      | 类型     | 必填   | 示例                                   | 描述             |
+|----------|--------|------|--------------------------------------|----------------|
 | fileType | string | True | %E8%BF%90%E7%BB%B4%E5%B7%A5%E5%85%B7 | 运维工具、业务模板、系统工具 |
-| pageNum | string | True | 1 |  |
-| pageSize | string | True | 100 |  |
+| pageNum  | string | True | 1                                    |                |
+| pageSize | string | True | 100                                  |                |
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -3259,11 +3259,11 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
-| Content-Type | string | True | application/json;charset=UTF-8 |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew      |    |
+| Content-Type  | string | True | application/json;charset=UTF-8                                                                                                                                                                       |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |    |
 
 #### 请求体
 
@@ -3297,7 +3297,7 @@
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -3324,14 +3324,14 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -3354,14 +3354,14 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -3440,14 +3440,14 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -3526,11 +3526,11 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
-| Content-Type | string | True | application/json;charset=UTF-8 |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew      |    |
+| Content-Type  | string | True | application/json;charset=UTF-8                                                                                                                                                                       |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |    |
 
 #### 请求体
 
@@ -3556,7 +3556,7 @@
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -3653,14 +3653,14 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -3787,14 +3787,14 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -3891,14 +3891,14 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -3972,14 +3972,14 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjgzMjNlNDNjLWE1NzYtNDNkNy05MWY3LWNiMDBjNmIyZWQzZiJ9.NB9qS3fIX3_KJUA_YQNublygCHx28Y9hh0c8afoAXHea7rgEMK5THIH2LWzUM3pbCAAfkNtzbjwIxZP4UUHNpQ |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {
@@ -4050,14 +4050,14 @@
 
 **请求头**
 
-| 参数名 | 类型 | 必填 | 示例 | 描述 |
-|--------|------|------|------|------|
-| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
-| Cookie | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |  |
+| 参数名           | 类型     | 必填   | 示例                                                                                                                                                                                                   | 描述 |
+|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----|
+| Authorization | string | True | Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew      |    |
+| Cookie        | string | True | Admin-Token=eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjUzNTllZWRmLTViZmItNDRhOC05ZWJjLTc5MGY3Y2I3Y2QzNCJ9.MA960ajg7G8R15poT1hdfZtxGfuoUxRkPOdj-AHVNpCUbBuo9YxGlfXDAN2w4_OUw3MQ_2JJTTb48SXAFP9rew |    |
 
 #### 响应
 
-**200** 
+**200**
 
 `json
 {

@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from yg_base import YgBase
@@ -57,7 +57,8 @@ def main():
     import argparse
     import json
     parser = argparse.ArgumentParser(description="监控查询脚本")
-    parser.add_argument('--type', choices=['overview', 'daily'], default='overview', help='查询类型: overview(监控概览), daily(每天统计)')
+    parser.add_argument('--type', choices=['overview', 'daily'], default='overview',
+                        help='查询类型: overview(监控概览), daily(每天统计)')
     parser.add_argument('--supplier-code', '--supplierCode', help='供应商编码（每天统计查询时必填）')
     parser.add_argument('--time', help='日期（每天统计查询时必填，格式：YYYY-MM-DD）')
     parser.add_argument('--app-username', '--app_username', help='APP用户名（用于获取APP token，可能与SSO用户名不同）')

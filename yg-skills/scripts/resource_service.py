@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from yg_base import YgBase
@@ -61,11 +61,13 @@ def main():
     import argparse
     import json
     parser = argparse.ArgumentParser(description="资源查询脚本")
-    parser.add_argument('--type', choices=['change', 'supplier'], default='change', help='查询类型: change(资源变化), supplier(云商资源)')
+    parser.add_argument('--type', choices=['change', 'supplier'], default='change',
+                        help='查询类型: change(资源变化), supplier(云商资源)')
     parser.add_argument('--time', help='时间范围（资源变化查询时必填，格式：YYYY-MM-DD--YYYY-MM-DD）')
     parser.add_argument('--supplier', help='供应商（资源变化查询时必填）')
     parser.add_argument('--supplier-code', '--supplierCode', help='供应商编码（云商资源查询时必填）')
-    parser.add_argument('--date-offset', '--dateOffset', type=int, default=7, help='日期偏移天数（云商资源查询时使用，默认7天）')
+    parser.add_argument('--date-offset', '--dateOffset', type=int, default=7,
+                        help='日期偏移天数（云商资源查询时使用，默认7天）')
     parser.add_argument('--app-username', '--app_username', help='APP用户名（用于获取APP token，可能与SSO用户名不同）')
     args = parser.parse_args()
 

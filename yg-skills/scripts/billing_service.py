@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from yg_base import YgBase
@@ -48,7 +48,8 @@ def main():
     billing_service = BillingService()
     billing_service.get_token(app_username=args.app_username)
 
-    print(f"查询账单系数: cloudSupplier={args.cloud_supplier}, timeTag={args.time_tag}, pageNum={args.page_num}, pageSize={args.page_size}")
+    print(
+        f"查询账单系数: cloudSupplier={args.cloud_supplier}, timeTag={args.time_tag}, pageNum={args.page_num}, pageSize={args.page_size}")
     result = billing_service.get_billing_coefficient(args.cloud_supplier, args.time_tag, args.page_num, args.page_size)
     if result:
         print("\n账单系数查询结果:")

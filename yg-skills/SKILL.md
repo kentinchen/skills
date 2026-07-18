@@ -20,15 +20,15 @@ description: |
 
 ## 服务列表
 
-| 服务 | 脚本 | 功能 |
-|------|------|------|
-| 通知服务 | notice_service.py | 查询通知清单、通知详情 |
-| 工单服务 | task_service.py | 查询待办工单、完成工单 |
-| 监控服务 | monitor_service.py | 查询监控概览、每天统计 |
+| 服务   | 脚本                  | 功能          |
+|------|---------------------|-------------|
+| 通知服务 | notice_service.py   | 查询通知清单、通知详情 |
+| 工单服务 | task_service.py     | 查询待办工单、完成工单 |
+| 监控服务 | monitor_service.py  | 查询监控概览、每天统计 |
 | 资源服务 | resource_service.py | 查询资源变化、云商资源 |
-| 文件服务 | file_service.py | 查询文件列表、文件资源 |
-| 账单服务 | billing_service.py | 查询账单系数 |
-| 客户服务 | customer_service.py | 查询用户画像、部门树 |
+| 文件服务 | file_service.py     | 查询文件列表、文件资源 |
+| 账单服务 | billing_service.py  | 查询账单系数      |
+| 客户服务 | customer_service.py | 查询用户画像、部门树  |
 
 ## 配置文件
 
@@ -54,12 +54,12 @@ python scripts/notice_service.py [--page-num <页码>] [--page-size <每页大�
 
 **参数说明：**
 
-| 参数 | 说明 | 默认值 |
-|------|------|--------|
-| --page-num, --pageNum | 页码 | 1 |
-| --page-size, --pageSize | 每页大小 | 5 |
-| --notice-type, --noticeType | 通知类型：1-普通公告，2-安全情报，3-资源变化 | 1 |
-| --app-username, --app_username | APP用户名（用于获取APP token） | 从配置文件读取 |
+| 参数                             | 说明                        | 默认值     |
+|--------------------------------|---------------------------|---------|
+| --page-num, --pageNum          | 页码                        | 1       |
+| --page-size, --pageSize        | 每页大小                      | 5       |
+| --notice-type, --noticeType    | 通知类型：1-普通公告，2-安全情报，3-资源变化 | 1       |
+| --app-username, --app_username | APP用户名（用于获取APP token）     | 从配置文件读取 |
 
 ### 查询通知详情
 
@@ -69,10 +69,10 @@ python scripts/notice_service.py --notice-id <通知ID> [--app-username <APP用�
 
 **参数说明：**
 
-| 参数 | 说明 | 默认值 |
-|------|------|--------|
-| --notice-id, --noticeId | 通知ID（必填） | 无 |
-| --app-username, --app_username | APP用户名 | 从配置文件读取 |
+| 参数                             | 说明       | 默认值     |
+|--------------------------------|----------|---------|
+| --notice-id, --noticeId        | 通知ID（必填） | 无       |
+| --app-username, --app_username | APP用户名   | 从配置文件读取 |
 
 ## 工单服务
 
@@ -84,16 +84,16 @@ python scripts/task_service.py --type todo [--page-num <页码>] [--page-size <�
 
 **参数说明：**
 
-| 参数 | 说明 | 默认值 |
-|------|------|--------|
-| --type | 查询类型：todo（待办），done（完成） | todo |
-| --page-num, --pageNum | 页码 | 1 |
-| --page-size, --pageSize | 每页大小 | 10 |
-| --instance-id, --instanceId | 实例ID（筛选条件） | None |
-| --instance-name, --instanceName | 实例名称（筛选条件） | None |
-| --task-id, --taskId | 任务ID（筛选条件） | None |
-| --task-name, --taskName | 任务名称（筛选条件） | None |
-| --app-username, --app_username | APP用户名 | 从配置文件读取 |
+| 参数                              | 说明                     | 默认值     |
+|---------------------------------|------------------------|---------|
+| --type                          | 查询类型：todo（待办），done（完成） | todo    |
+| --page-num, --pageNum           | 页码                     | 1       |
+| --page-size, --pageSize         | 每页大小                   | 10      |
+| --instance-id, --instanceId     | 实例ID（筛选条件）             | None    |
+| --instance-name, --instanceName | 实例名称（筛选条件）             | None    |
+| --task-id, --taskId             | 任务ID（筛选条件）             | None    |
+| --task-name, --taskName         | 任务名称（筛选条件）             | None    |
+| --app-username, --app_username  | APP用户名                 | 从配置文件读取 |
 
 ### 查询完成工单
 
@@ -117,12 +117,12 @@ python scripts/monitor_service.py --type daily --supplier-code <供应商编码>
 
 **参数说明：**
 
-| 参数 | 说明 | 默认值 |
-|------|------|--------|
-| --type | 查询类型：overview（监控概览），daily（每天统计） | overview |
-| --supplier-code, --supplierCode | 供应商编码（每天统计时必填） | 无 |
-| --time | 日期（每天统计时必填，格式：YYYY-MM-DD） | 无 |
-| --app-username, --app_username | APP用户名 | 从配置文件读取 |
+| 参数                              | 说明                              | 默认值      |
+|---------------------------------|---------------------------------|----------|
+| --type                          | 查询类型：overview（监控概览），daily（每天统计） | overview |
+| --supplier-code, --supplierCode | 供应商编码（每天统计时必填）                  | 无        |
+| --time                          | 日期（每天统计时必填，格式：YYYY-MM-DD）       | 无        |
+| --app-username, --app_username  | APP用户名                          | 从配置文件读取  |
 
 ## 资源服务
 
@@ -134,12 +134,12 @@ python scripts/resource_service.py --type change --time <时间范围> --supplie
 
 **参数说明：**
 
-| 参数 | 说明 | 默认值 |
-|------|------|--------|
-| --type | 查询类型：change（资源变化），supplier（云商资源） | change |
-| --time | 时间范围（资源变化时必填，格式：YYYY-MM-DD--YYYY-MM-DD） | 无 |
-| --supplier | 供应商（资源变化时必填） | 无 |
-| --app-username, --app_username | APP用户名 | 从配置文件读取 |
+| 参数                             | 说明                                      | 默认值     |
+|--------------------------------|-----------------------------------------|---------|
+| --type                         | 查询类型：change（资源变化），supplier（云商资源）        | change  |
+| --time                         | 时间范围（资源变化时必填，格式：YYYY-MM-DD--YYYY-MM-DD） | 无       |
+| --supplier                     | 供应商（资源变化时必填）                            | 无       |
+| --app-username, --app_username | APP用户名                                  | 从配置文件读取 |
 
 ### 查询云商资源
 
@@ -149,11 +149,11 @@ python scripts/resource_service.py --type supplier --supplier-code <供应商编
 
 **参数说明：**
 
-| 参数 | 说明 | 默认值 |
-|------|------|--------|
-| --supplier-code, --supplierCode | 供应商编码（必填） | 无 |
-| --date-offset, --dateOffset | 日期偏移天数 | 7 |
-| --app-username, --app_username | APP用户名 | 从配置文件读取 |
+| 参数                              | 说明        | 默认值     |
+|---------------------------------|-----------|---------|
+| --supplier-code, --supplierCode | 供应商编码（必填） | 无       |
+| --date-offset, --dateOffset     | 日期偏移天数    | 7       |
+| --app-username, --app_username  | APP用户名    | 从配置文件读取 |
 
 ## 文件服务
 
@@ -165,13 +165,13 @@ python scripts/file_service.py --type list --file-type <文件类型> [--page-nu
 
 **参数说明：**
 
-| 参数 | 说明 | 默认值 |
-|------|------|--------|
-| --type | 查询类型：list（文件列表），resources（文件资源） | list |
-| --file-type, --fileType | 文件类型（文件列表时必填：运维工具、业务模板、系统工具） | 无 |
-| --page-num, --pageNum | 页码 | 1 |
-| --page-size, --pageSize | 每页大小 | 100 |
-| --app-username, --app_username | APP用户名 | 从配置文件读取 |
+| 参数                             | 说明                              | 默认值     |
+|--------------------------------|---------------------------------|---------|
+| --type                         | 查询类型：list（文件列表），resources（文件资源） | list    |
+| --file-type, --fileType        | 文件类型（文件列表时必填：运维工具、业务模板、系统工具）    | 无       |
+| --page-num, --pageNum          | 页码                              | 1       |
+| --page-size, --pageSize        | 每页大小                            | 100     |
+| --app-username, --app_username | APP用户名                          | 从配置文件读取 |
 
 ### 查询文件资源
 
@@ -181,13 +181,13 @@ python scripts/file_service.py --type resources --key <资源键> [--page-num <�
 
 **参数说明：**
 
-| 参数 | 说明 | 默认值 |
-|------|------|--------|
-| --key | 资源键（必填，示例：ResourcesUp） | 无 |
-| --resource | 资源类型 | 7 |
-| --page-num, --pageNum | 页码 | 1 |
-| --page-size, --pageSize | 每页大小 | 100 |
-| --app-username, --app_username | APP用户名 | 从配置文件读取 |
+| 参数                             | 说明                     | 默认值     |
+|--------------------------------|------------------------|---------|
+| --key                          | 资源键（必填，示例：ResourcesUp） | 无       |
+| --resource                     | 资源类型                   | 7       |
+| --page-num, --pageNum          | 页码                     | 1       |
+| --page-size, --pageSize        | 每页大小                   | 100     |
+| --app-username, --app_username | APP用户名                 | 从配置文件读取 |
 
 ## 账单服务
 
@@ -199,13 +199,13 @@ python scripts/billing_service.py --cloud-supplier <云供应商编码> --time-t
 
 **参数说明：**
 
-| 参数 | 说明 | 默认值 |
-|------|------|--------|
-| --cloud-supplier, --cloudSupplier | 云供应商编码（必填，示例：chengyun） | 无 |
-| --time-tag, --timeTag | 时间标签（必填，格式：YYYY-MM-DD） | 无 |
-| --page-num, --pageNum | 页码 | 1 |
-| --page-size, --pageSize | 每页大小 | 10 |
-| --app-username, --app_username | APP用户名 | 从配置文件读取 |
+| 参数                                | 说明                     | 默认值     |
+|-----------------------------------|------------------------|---------|
+| --cloud-supplier, --cloudSupplier | 云供应商编码（必填，示例：chengyun） | 无       |
+| --time-tag, --timeTag             | 时间标签（必填，格式：YYYY-MM-DD） | 无       |
+| --page-num, --pageNum             | 页码                     | 1       |
+| --page-size, --pageSize           | 每页大小                   | 10      |
+| --app-username, --app_username    | APP用户名                 | 从配置文件读取 |
 
 ## 客户服务
 
@@ -223,10 +223,10 @@ python scripts/customer_service.py --type dept [--app-username <APP用户名>]
 
 **参数说明：**
 
-| 参数 | 说明 | 默认值 |
-|------|------|--------|
-| --type | 查询类型：profile（用户画像），dept（部门树） | profile |
-| --app-username, --app_username | APP用户名 | 从配置文件读取 |
+| 参数                             | 说明                           | 默认值     |
+|--------------------------------|------------------------------|---------|
+| --type                         | 查询类型：profile（用户画像），dept（部门树） | profile |
+| --app-username, --app_username | APP用户名                       | 从配置文件读取 |
 
 ## 执行要求
 
@@ -236,47 +236,54 @@ python scripts/customer_service.py --type dept [--app-username <APP用户名>]
 
 ## 错误处理
 
-| 错误场景 | 处理方式 |
-|----------|----------|
-| 依赖未安装 | 提示用户执行 `pip install requests pycryptodome pyyaml` |
-| 配置文件不存在 | 提示用户先运行登录脚本配置 |
-| 用户名或密码错误 | 提示用户检查配置文件 |
-| OCR服务不可达 | 提示用户检查ddddocr-fastapi服务是否启动 |
-| token失效 | 自动重新登录获取新token |
+| 错误场景     | 处理方式                                              |
+|----------|---------------------------------------------------|
+| 依赖未安装    | 提示用户执行 `pip install requests pycryptodome pyyaml` |
+| 配置文件不存在  | 提示用户先运行登录脚本配置                                     |
+| 用户名或密码错误 | 提示用户检查配置文件                                        |
+| OCR服务不可达 | 提示用户检查ddddocr-fastapi服务是否启动                       |
+| token失效  | 自动重新登录获取新token                                    |
 
 ## 示例
 
 **查询通知清单：**
+
 ```bash
 python scripts/notice_service.py --notice-type 1 --page-size 10
 ```
 
 **查询待办工单：**
+
 ```bash
 python scripts/task_service.py --type todo
 ```
 
 **查询监控概览：**
+
 ```bash
 python scripts/monitor_service.py --type overview
 ```
 
 **查询资源变化：**
+
 ```bash
 python scripts/resource_service.py --type change --time "2026-07-06--2026-07-12" --supplier "H3C_outside"
 ```
 
 **查询文件列表：**
+
 ```bash
 python scripts/file_service.py --type list --file-type "运维工具"
 ```
 
 **查询账单系数：**
+
 ```bash
 python scripts/billing_service.py --cloud-supplier "chengyun" --time-tag "2026-07-15"
 ```
 
 **查询用户画像：**
+
 ```bash
 python scripts/customer_service.py --type profile
 ```

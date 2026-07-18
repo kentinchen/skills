@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from yg_base import YgBase
@@ -53,7 +53,8 @@ def main():
     parser = argparse.ArgumentParser(description="通知查询脚本")
     parser.add_argument('--page-num', '--pageNum', type=int, default=1, help='页码')
     parser.add_argument('--page-size', '--pageSize', type=int, default=5, help='每页大小')
-    parser.add_argument('--notice-type', '--noticeType', type=int, default=1, help='通知类型: 普通公告1、安全情报2、资源变化')
+    parser.add_argument('--notice-type', '--noticeType', type=int, default=1,
+                        help='通知类型: 普通公告1、安全情报2、资源变化')
     parser.add_argument('--notice-id', '--noticeId', help='通知ID（查询通知详情时使用）')
     parser.add_argument('--app-username', '--app_username', help='APP用户名（用于获取APP token，可能与SSO用户名不同）')
     args = parser.parse_args()

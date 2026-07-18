@@ -20,11 +20,11 @@ description: |
 
 ## 服务列表
 
-| 服务 | 脚本 | 功能 |
-|------|------|------|
-| SSO登录 | yw_login.py | 执行SSO登录，获取token |
-| 基础服务 | yw_base.py | yw系统基础类，封装API调用 |
-| 工单服务 | task_service.py | 查询待办工单数量、已办工单、工单动作表、处理记录 |
+| 服务    | 脚本              | 功能                       |
+|-------|-----------------|--------------------------|
+| SSO登录 | yw_login.py     | 执行SSO登录，获取token          |
+| 基础服务  | yw_base.py      | yw系统基础类，封装API调用          |
+| 工单服务  | task_service.py | 查询待办工单数量、已办工单、工单动作表、处理记录 |
 
 ## 配置文件
 
@@ -51,17 +51,17 @@ python scripts/yw_login.py [--proxy <代理地址>] [--sso-url <SSO地址>] [--u
 
 **参数说明：**
 
-| 参数 | 说明 | 默认值 |
-|------|------|--------|
-| --proxy | 代理地址 | socks5://localhost:20809 |
-| --sso-url, --sso_url | SSO服务地址 | https://zwwsfrz.cdmbc.cn |
-| --username | 用户名 | 从配置文件读取 |
-| --password | 密码 | 从配置文件读取 |
-| --app-url, --app_url | APP服务地址 | https://szdz.cdmbc.cn:8090 |
-| --app-code, --app_code | APP_CODE | a1234cd22f9f3647417f71a1e3bc03d6 |
+| 参数                                       | 说明                | 默认值                              |
+|------------------------------------------|-------------------|----------------------------------|
+| --proxy                                  | 代理地址              | socks5://localhost:20809         |
+| --sso-url, --sso_url                     | SSO服务地址           | https://zwwsfrz.cdmbc.cn         |
+| --username                               | 用户名               | 从配置文件读取                          |
+| --password                               | 密码                | 从配置文件读取                          |
+| --app-url, --app_url                     | APP服务地址           | https://szdz.cdmbc.cn:8090       |
+| --app-code, --app_code                   | APP_CODE          | a1234cd22f9f3647417f71a1e3bc03d6 |
 | --login-device-info, --login_device_info | LOGIN_DEVICE_INFO | a8799d06d5e4b4bf4b8efe54b5086f7c |
-| --ocr-server, --ocr_server | OCR服务地址 | http://localhost:8000 |
-| --force-login, --force_login | 强制重新登录 | False |
+| --ocr-server, --ocr_server               | OCR服务地址           | http://localhost:8000            |
+| --force-login, --force_login             | 强制重新登录            | False                            |
 
 **登录流程：**
 
@@ -124,17 +124,19 @@ python scripts/task_service.py --type todo_count [--view-id <视图ID>]
 
 **参数说明：**
 
-| 参数 | 说明 | 默认值 |
-|------|------|--------|
-| --type | 查询类型：todo_count（待办数量） | todo_count |
-| --view-id, --viewId | 视图ID | MY_TODO |
+| 参数                  | 说明                    | 默认值        |
+|---------------------|-----------------------|------------|
+| --type              | 查询类型：todo_count（待办数量） | todo_count |
+| --view-id, --viewId | 视图ID                  | MY_TODO    |
 
 **示例：**
+
 ```bash
 python scripts/task_service.py --type todo_count
 ```
 
 **返回示例：**
+
 ```json
 {
   "status": "success",
@@ -154,10 +156,10 @@ python scripts/task_service.py --type handled [--view-id <视图ID>]
 
 **参数说明：**
 
-| 参数 | 说明 | 默认值 |
-|------|------|--------|
-| --type | 查询类型：handled（已办工单） | - |
-| --view-id, --viewId | 视图ID | MY_HANDLER |
+| 参数                  | 说明                 | 默认值        |
+|---------------------|--------------------|------------|
+| --type              | 查询类型：handled（已办工单） | -          |
+| --view-id, --viewId | 视图ID               | MY_HANDLER |
 
 ### 查询工单动作表
 
@@ -173,28 +175,31 @@ python scripts/task_service.py --type history --work-order-id <工单ID> --curre
 
 **参数说明：**
 
-| 参数 | 说明 | 默认值 |
-|------|------|--------|
-| --type | 查询类型：history（处理记录） | - |
-| --work-order-id, --workOrderId | 工单ID（必填） | - |
-| --current-node-id, --currentNodeId | 当前节点ID（必填） | - |
-| --data-types, --dataTypes | 数据类型列表 | approve modify history counterSigned |
+| 参数                                 | 说明                 | 默认值                                  |
+|------------------------------------|--------------------|--------------------------------------|
+| --type                             | 查询类型：history（处理记录） | -                                    |
+| --work-order-id, --workOrderId     | 工单ID（必填）           | -                                    |
+| --current-node-id, --currentNodeId | 当前节点ID（必填）         | -                                    |
+| --data-types, --dataTypes          | 数据类型列表             | approve modify history counterSigned |
 
 ## API调用
 
 yw系统API需要通过Cookie和Authentication header进行认证：
 
 **Cookie格式：**
+
 ```
 auth_token_key=<auth_token_key>; sso_token=<sso_token>; YH-TOKEN=<token>; JSESSIONID=<jsessionid>
 ```
 
 **Authentication格式：**
+
 ```
 Bearer <sso_token>
 ```
 
 **其他必要headers：**
+
 - `language`: zh
 - `noviceGuidance`: false
 - `tenant-code`: <租户编码>
@@ -263,52 +268,60 @@ result = yw.get_system_list()
 
 ## 错误处理
 
-| 错误场景 | 处理方式 |
-|----------|----------|
-| 依赖未安装 | 提示用户执行 `pip install requests pycryptodome pyyaml` |
-| 配置文件不存在 | 提示用户先运行登录脚本配置 |
-| 用户名或密码错误 | 提示用户检查配置文件 |
-| OCR服务不可达 | 提示用户检查ddddocr-fastapi服务是否启动 |
-| token失效 | 自动重新登录获取新token |
+| 错误场景     | 处理方式                                              |
+|----------|---------------------------------------------------|
+| 依赖未安装    | 提示用户执行 `pip install requests pycryptodome pyyaml` |
+| 配置文件不存在  | 提示用户先运行登录脚本配置                                     |
+| 用户名或密码错误 | 提示用户检查配置文件                                        |
+| OCR服务不可达 | 提示用户检查ddddocr-fastapi服务是否启动                       |
+| token失效  | 自动重新登录获取新token                                    |
 
 ## 示例
 
 **执行登录：**
+
 ```bash
 python scripts/yw_login.py --username 15208450822 --password Admin@qwer123 --force-login
 ```
 
 **使用保存的配置登录：**
+
 ```bash
 python scripts/yw_login.py
 ```
 
 **强制重新登录：**
+
 ```bash
 python scripts/yw_login.py --force-login
 ```
 
 **查询未完成工单数：**
+
 ```bash
 python scripts/task_service.py --type todo_count
 ```
 
 **查询已办工单：**
+
 ```bash
 python scripts/task_service.py --type handled
 ```
 
 **查询工单动作表：**
+
 ```bash
 python scripts/task_service.py --type action_map
 ```
 
 **查询处理记录：**
+
 ```bash
 python scripts/task_service.py --type history --work-order-id "59d73ef734a441fdb9c254ce74657a5e" --current-node-id "EndEvent_1k8gkqf"
 ```
 
 **使用代理登录：**
+
 ```bash
 python scripts/yw_login.py --proxy socks5://localhost:20809
 ```

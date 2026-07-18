@@ -102,7 +102,7 @@ class YgBase:
                     print(f"获取到APP token: {app_token}")
                     self._token = app_token
                     return app_token
-                print(f"APP登录成功，但未获取到token")
+                print("APP登录成功，但未获取到token")
             else:
                 print(f"APP登录失败: {result.get('msg')}")
         except Exception as e:
@@ -146,7 +146,7 @@ class YgBase:
                         return app_token
                     print("无法获取APP token，使用SSO token")
                     return token
-            print(f"登录成功，但未获取到token")
+            print("登录成功，但未获取到token")
         else:
             print(f"登录失败: {result.get('resp_msg') if result else '未知错误'}")
 
@@ -188,7 +188,8 @@ class YgBase:
             if method.lower() == 'get':
                 response = requests.get(url, headers=headers, params=params, proxies=proxies, verify=False)
             elif method.lower() == 'post':
-                response = requests.post(url, headers=headers, params=params, json=json_data, proxies=proxies, verify=False)
+                response = requests.post(url, headers=headers, params=params, json=json_data, proxies=proxies,
+                                         verify=False)
             else:
                 print(f"不支持的HTTP方法: {method}")
                 return None

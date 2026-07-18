@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from yg_base import YgBase
@@ -53,7 +53,8 @@ def main():
     import argparse
     import json
     parser = argparse.ArgumentParser(description="客户服务查询脚本")
-    parser.add_argument('--type', choices=['profile', 'dept'], default='profile', help='查询类型: profile(用户画像), dept(部门树)')
+    parser.add_argument('--type', choices=['profile', 'dept'], default='profile',
+                        help='查询类型: profile(用户画像), dept(部门树)')
     parser.add_argument('--app-username', '--app_username', help='APP用户名（用于获取APP token，可能与SSO用户名不同）')
     args = parser.parse_args()
 

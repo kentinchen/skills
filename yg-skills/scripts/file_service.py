@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from yg_base import YgBase
@@ -64,7 +64,8 @@ def main():
     import argparse
     import json
     parser = argparse.ArgumentParser(description="文件查询脚本")
-    parser.add_argument('--type', choices=['list', 'resources'], default='list', help='查询类型: list(文件列表), resources(文件资源)')
+    parser.add_argument('--type', choices=['list', 'resources'], default='list',
+                        help='查询类型: list(文件列表), resources(文件资源)')
     parser.add_argument('--file-type', '--fileType', help='文件类型: 运维工具、业务模板、系统工具（文件列表查询时必填）')
     parser.add_argument('--key', help='资源键（文件资源查询时必填，示例：ResourcesUp）')
     parser.add_argument('--page-num', '--pageNum', type=int, default=1, help='页码')
@@ -81,7 +82,8 @@ def main():
             print("错误: 查询文件资源需要提供 --key 参数")
             return
 
-        print(f"查询文件资源: key={args.key}, pageNumber={args.page_num}, pageSize={args.page_size}, resource={args.resource}")
+        print(
+            f"查询文件资源: key={args.key}, pageNumber={args.page_num}, pageSize={args.page_size}, resource={args.resource}")
         result = file_service.get_file_resources(args.key, args.page_num, args.page_size, args.resource)
         if result:
             print("\n文件资源查询结果:")
