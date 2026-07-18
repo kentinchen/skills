@@ -1,8 +1,8 @@
 ---
 name: yw-services
-version: 1.0.0
+version: 1.1.0
 description: |
-  yw系统综合服务，支持SSO登录、查询待办工单、系统清单等功能。
+  yw系统综合服务，支持SSO登录、APP token换取、查询待办工单、系统清单等功能。
   触发条件：当用户需要登录yw系统或查询yw系统的工单、系统清单等信息时调用。
 ---
 
@@ -31,14 +31,14 @@ description: |
 配置文件路径：`~/.yw-skills/config.yml`
 
 ```yaml
-username: your_username
-password: your_password
-sso_url: http://172.60.142.10
-app_url: http://172.60.142.10
-proxy: socks5://127.0.0.1:20808
-app_code: 2a06bab333f5257deb664b8b16a30f23
+username: 15208450822
+password: Admin@qwer123
+sso_url: https://zwwsfrz.cdmbc.cn
+app_url: https://szdz.cdmbc.cn:8090
+proxy: socks5://localhost:20809
+app_code: a1234cd22f9f3647417f71a1e3bc03d6
 login_device_info: a8799d06d5e4b4bf4b8efe54b5086f7c
-tenant_code: aipuxjgmbqhbprui.clouds-work
+tenant_code: null
 ```
 
 ## SSO登录
@@ -53,12 +53,12 @@ python scripts/yw_login.py [--proxy <代理地址>] [--sso-url <SSO地址>] [--u
 
 | 参数 | 说明 | 默认值 |
 |------|------|--------|
-| --proxy | 代理地址 | 从配置文件读取 |
-| --sso-url, --sso_url | SSO服务地址 | http://172.60.142.10 |
+| --proxy | 代理地址 | socks5://localhost:20809 |
+| --sso-url, --sso_url | SSO服务地址 | https://zwwsfrz.cdmbc.cn |
 | --username | 用户名 | 从配置文件读取 |
 | --password | 密码 | 从配置文件读取 |
-| --app-url, --app_url | APP服务地址 | http://172.60.142.10 |
-| --app-code, --app_code | APP_CODE | 2a06bab333f5257deb664b8b16a30f23 |
+| --app-url, --app_url | APP服务地址 | https://szdz.cdmbc.cn:8090 |
+| --app-code, --app_code | APP_CODE | a1234cd22f9f3647417f71a1e3bc03d6 |
 | --login-device-info, --login_device_info | LOGIN_DEVICE_INFO | a8799d06d5e4b4bf4b8efe54b5086f7c |
 | --ocr-server, --ocr_server | OCR服务地址 | http://localhost:8000 |
 | --force-login, --force_login | 强制重新登录 | False |
@@ -67,8 +67,9 @@ python scripts/yw_login.py [--proxy <代理地址>] [--sso-url <SSO地址>] [--u
 
 1. 获取验证码（GET /verify-server/kaptcha/generate）
 2. 识别验证码（调用OCR服务）
-3. 执行登录（POST /sso-server/wmh/Internal/users）
-4. 保存token到配置文件
+3. SSO登录（POST /sso-server/wmh/Internal/users），获取art和sso_token
+4. 换取APP token（POST /api-auth/oauth/user/doLogin?sp=app_code&art=art）
+5. 保存token、sso_token、auth_token_key、JSESSIONID到配置文件
 
 **登录成功返回：**
 
@@ -79,6 +80,37 @@ python scripts/yw_login.py [--proxy <代理地址>] [--sso-url <SSO地址>] [--u
   "sso_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
   "user_id": "8054ce387f0b4472",
   "message": "登录成功"
+}
+```
+
+**SSO登录响应：**
+
+```json
+{
+  "resp_code": 200,
+  "resp_msg": "success",
+  "datas": {
+    "isAuth": true,
+    "art": "9e546520217142e69500337937b4655b",
+    "userId": "1698974893074419712",
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+    "url": "https://szdz.cdmbc.cn:8090/tysfrz"
+  }
+}
+```
+
+**APP登录响应：**
+
+```json
+{
+  "code": 200,
+  "msg": "登录成功",
+  "datas": {
+    "id": "8054ce387f0b4472",
+    "username": "15208450822",
+    "realname": "黄现",
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
+  }
 }
 ```
 
@@ -105,8 +137,11 @@ python scripts/task_service.py --type todo_count
 **返回示例：**
 ```json
 {
-  "data": 5,
-  "code": 200,
+  "status": "success",
+  "msg": null,
+  "code": 100000,
+  "rtnTime": 1784384577232,
+  "data": 0,
   "success": true
 }
 ```
@@ -240,7 +275,7 @@ result = yw.get_system_list()
 
 **执行登录：**
 ```bash
-python scripts/yw_login.py --username 18208151273 --password your_password --force-login
+python scripts/yw_login.py --username 15208450822 --password Admin@qwer123 --force-login
 ```
 
 **使用保存的配置登录：**
@@ -271,4 +306,9 @@ python scripts/task_service.py --type action_map
 **查询处理记录：**
 ```bash
 python scripts/task_service.py --type history --work-order-id "59d73ef734a441fdb9c254ce74657a5e" --current-node-id "EndEvent_1k8gkqf"
+```
+
+**使用代理登录：**
+```bash
+python scripts/yw_login.py --proxy socks5://localhost:20809
 ```
