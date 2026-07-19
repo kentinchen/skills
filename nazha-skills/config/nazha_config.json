@@ -1,0 +1,7 @@
+{
+  "base_url": "http://localhost:8008",
+  "username": "admin",
+  "password": "admin",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ0MzQ5NDUsImtleUlkIjoiNXpNU29NWjNaa1VRWjhyWmVTUG82eXRGRTV4VXRIYnEiLCJvcmlnX2lhdCI6MTc4NDQzMTM0NSwidWlkIjoianVTSmVIblEifQ.SREyo0Od5MH1HvSU0GbPqpMEBSJGINP5b1xAoqPTQnA",
+  "pat_token": null
+}

@@ -1,0 +1,1067 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "哪吒监控 (Nezha) API",
+    "description": "哪吒监控 Dashboard API 文档，基于 https://nezha.wiki/guide/api.html",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8008",
+      "description": "本地测试服务器"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/api/v1/login": {
+      "post": {
+        "summary": "登录获取Token",
+        "description": "使用用户名和密码登录，获取JWT Token",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "admin"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "your-password"
+                  }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "登录成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "token": {
+                          "type": "string",
+                          "example": "JWT_TOKEN"
+                        },
+                        "expire": {
+                          "type": "string",
+                          "example": "2026-05-18T12:00:00+02:00"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/setting": {
+      "get": {
+        "summary": "获取系统设置",
+        "description": "读取站点名称、语言、前端模板、OAuth2提供方、TSDB是否启用等基础信息。未登录访问时只返回允许游客读取的配置",
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/server": {
+      "get": {
+        "summary": "获取服务器列表",
+        "description": "返回当前用户有权限管理的服务器列表。管理员可见所有服务器，普通用户只能看到自己名下的服务器",
+        "security": [
+          {
+            "BearerAuth": ["nezha:inventory:read"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "pagination": {
+                          "type": "object",
+                          "properties": {
+                            "offset": {
+                              "type": "integer",
+                              "example": 0
+                            },
+                            "limit": {
+                              "type": "integer",
+                              "example": 10
+                            },
+                            "total": {
+                              "type": "integer",
+                              "example": 100
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ws/server": {
+      "get": {
+        "summary": "获取服务器实时状态流",
+        "description": "返回WebSocket数据流，用于实时刷新服务器在线状态和资源占用",
+        "security": [
+          {
+            "BearerAuth": ["nezha:inventory:read"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "连接成功"
+          }
+        }
+      }
+    },
+    "/api/v1/service": {
+      "get": {
+        "summary": "获取服务监控概览",
+        "description": "返回服务监控当前状态和周期流量统计",
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/service/{id}/history": {
+      "get": {
+        "summary": "获取服务监控历史",
+        "description": "返回服务监控的历史数据",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "服务监控ID"
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["1d", "7d", "30d"]
+            },
+            "default": "1d",
+            "description": "查询周期"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "service_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "service_name": {
+                          "type": "string",
+                          "example": "HTTPS"
+                        },
+                        "servers": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "server_id": {
+                                "type": "integer",
+                                "example": 1
+                              },
+                              "server_name": {
+                                "type": "string",
+                                "example": "Server 1"
+                              },
+                              "stats": {
+                                "type": "object",
+                                "properties": {
+                                  "avg_delay": {
+                                    "type": "number",
+                                    "example": 68.2
+                                  },
+                                  "up_percent": {
+                                    "type": "number",
+                                    "example": 99.9
+                                  },
+                                  "total_up": {
+                                    "type": "integer",
+                                    "example": 1440
+                                  },
+                                  "total_down": {
+                                    "type": "integer",
+                                    "example": 1
+                                  },
+                                  "data_points": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "ts": {
+                                          "type": "integer",
+                                          "example": 1760000000000
+                                        },
+                                        "delay": {
+                                          "type": "number",
+                                          "example": 68.2
+                                        },
+                                        "status": {
+                                          "type": "integer",
+                                          "example": 1
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/server/{id}/metrics": {
+      "get": {
+        "summary": "获取服务器指标历史",
+        "description": "返回服务器指定指标的历史数据。该接口依赖TSDB，未启用TSDB时data_points为空",
+        "security": [
+          {
+            "BearerAuth": ["nezha:server:read"]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "服务器ID"
+          },
+          {
+            "name": "metric",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["cpu", "memory", "swap", "disk", "net_in_speed", "net_out_speed", "net_in_transfer", "net_out_transfer", "load1", "load5", "load15", "tcp_conn", "udp_conn", "process_count", "temperature", "uptime", "gpu"]
+            },
+            "description": "指标名称"
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["1d", "7d", "30d"]
+            },
+            "default": "1d",
+            "description": "查询周期"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "server_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "server_name": {
+                          "type": "string",
+                          "example": "Server 1"
+                        },
+                        "metric": {
+                          "type": "string",
+                          "example": "cpu"
+                        },
+                        "data_points": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "ts": {
+                                "type": "integer",
+                                "example": 1760000000000
+                              },
+                              "value": {
+                                "type": "number",
+                                "example": 12.34
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/service/{id}/server": {
+      "get": {
+        "summary": "获取服务下的服务器",
+        "description": "返回某个服务监控关联的服务器列表",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "服务监控ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/server/{id}/service": {
+      "get": {
+        "summary": "获取服务器下的服务监控",
+        "description": "返回某台服务器关联的服务监控列表",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "服务器ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/server-group": {
+      "get": {
+        "summary": "获取服务器分组列表",
+        "description": "返回服务器分组列表",
+        "security": [
+          {
+            "BearerAuth": ["nezha:inventory:read"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/api-tokens": {
+      "get": {
+        "summary": "获取API Token列表",
+        "description": "返回当前用户的API Token列表。该接口只能使用JWT调用，禁止使用PAT",
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/profile": {
+      "get": {
+        "summary": "获取个人资料",
+        "description": "返回当前用户的个人资料。该接口只能使用JWT调用，禁止使用PAT",
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/transfer": {
+      "get": {
+        "summary": "获取服务器转移记录",
+        "description": "返回服务器转移记录列表",
+        "security": [
+          {
+            "BearerAuth": ["nezha:transfer:read"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/transfer/{id}/cancel": {
+      "post": {
+        "summary": "取消服务器转移",
+        "description": "取消指定的服务器转移任务",
+        "security": [
+          {
+            "BearerAuth": ["nezha:transfer:write"]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "转移任务ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/transfer/{id}/retry": {
+      "post": {
+        "summary": "重试服务器转移",
+        "description": "重试指定的服务器转移任务",
+        "security": [
+          {
+            "BearerAuth": ["nezha:transfer:write"]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "转移任务ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cron": {
+      "get": {
+        "summary": "获取定时任务列表",
+        "description": "返回定时任务列表",
+        "security": [
+          {
+            "BearerAuth": ["nezha:cron:read"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cron/{id}/manual": {
+      "post": {
+        "summary": "手动触发定时任务",
+        "description": "手动触发指定的定时任务",
+        "security": [
+          {
+            "BearerAuth": ["nezha:cron:exec"]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "定时任务ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "操作成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notification": {
+      "get": {
+        "summary": "获取通知方式列表",
+        "description": "返回通知方式列表",
+        "security": [
+          {
+            "BearerAuth": ["nezha:notification:read"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notification-group": {
+      "get": {
+        "summary": "获取通知组列表",
+        "description": "返回通知组列表",
+        "security": [
+          {
+            "BearerAuth": ["nezha:notification-group:read"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/alert-rule": {
+      "get": {
+        "summary": "获取警报规则列表",
+        "description": "返回警报规则列表",
+        "security": [
+          {
+            "BearerAuth": ["nezha:alertrule:read"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ddns": {
+      "get": {
+        "summary": "获取DDNS配置列表",
+        "description": "返回DDNS配置列表",
+        "security": [
+          {
+            "BearerAuth": ["nezha:ddns:read"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/nat": {
+      "get": {
+        "summary": "获取NAT规则列表",
+        "description": "返回NAT规则列表",
+        "security": [
+          {
+            "BearerAuth": ["nezha:nat:read"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user": {
+      "get": {
+        "summary": "获取用户列表",
+        "description": "返回用户列表（管理员权限）",
+        "security": [
+          {
+            "BearerAuth": ["nezha:admin:*"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/online-user": {
+      "get": {
+        "summary": "获取在线用户列表",
+        "description": "返回在线用户列表（管理员权限）",
+        "security": [
+          {
+            "BearerAuth": ["nezha:admin:*"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/waf": {
+      "get": {
+        "summary": "获取WAF规则",
+        "description": "返回WAF规则列表（管理员权限）",
+        "security": [
+          {
+            "BearerAuth": ["nezha:admin:*"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp": {
+      "post": {
+        "summary": "MCP入口",
+        "description": "MCP接口入口，只接受PAT认证，不接受JWT",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "调用成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
