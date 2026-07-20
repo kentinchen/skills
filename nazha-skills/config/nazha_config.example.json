@@ -1,0 +1,7 @@
+{
+  "base_url": "http://localhost:8008",
+  "username": "your_username",
+  "password": "your_password",
+  "token": null,
+  "pat_token": null
+}
