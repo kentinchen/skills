@@ -47,6 +47,13 @@ def save_servers_config(host1, port1):
         print(f"保存配置文件失败: {e}")
 
 
+def build_identity_option(identity_file):
+    """构建 SSH 密钥参数"""
+    if identity_file:
+        return f'-i "{identity_file}" -o IdentitiesOnly=yes '
+    return ''
+
+
 # 解析公网地址，提取主机和端口
 def parse_tcp_url(url):
     # 匹配 tcp://host:port 格式
@@ -158,10 +165,11 @@ def proxy_server(port, target_host, target_port):
     server.close()
 
 
-def start_ssh_proxy(command, is_first_proxy=False, dp1=20808):
+def start_ssh_proxy(command, is_first_proxy=False, dp1=20808, identity_file=None):
     try:
+        identity_opt = build_identity_option(identity_file)
         git_bash_path = r"C:\Program Files\Git\git-bash.exe"
-        full_command = f'"{git_bash_path}" -c "ssh -o StrictHostKeyChecking=no -N {command}"'
+        full_command = f'"{git_bash_path}" -c "ssh -o StrictHostKeyChecking=no {identity_opt}-N {command}"'
         process = subprocess.Popen(
             full_command,
             shell=True,
@@ -170,6 +178,8 @@ def start_ssh_proxy(command, is_first_proxy=False, dp1=20808):
             text=True
         )
         print(f"已启动代理: {full_command}")
+        if identity_file:
+            print(f"使用本地密钥: {identity_file}")
         print(f"进程ID: {process.pid}")
 
         import time
@@ -244,20 +254,25 @@ def python_nc(host, port):
             sock.close()
 
 
-def start_second_proxy(host1, port1, dp1=20808, dp2=20809):
+def start_second_proxy(host1, port1, dp1=20808, dp2=20809, identity_file=None):
     try:
         import tempfile
         import os
 
+        identity_opt = build_identity_option(identity_file)
+        # 注意：-i 和 IdentitiesOnly 需要放在 ProxyCommand 后面的 ssh 参数中
+        proxy2_inline = f'ssh -o "ProxyCommand connect -S 127.0.0.1:{dp1} %h %p" {identity_opt}-N -D {dp2} -p {port1} root@{host1}'
+
         with tempfile.NamedTemporaryFile(mode='w', suffix='.sh', delete=False) as f:
-            f.write(f'ssh -o "ProxyCommand connect -S 127.0.0.1:{dp1} %h %p" -D {dp2} -p {port1} root@{host1}\n')
+            f.write(proxy2_inline + '\n')
             script_path = f.name
 
         git_bash_path = r"C:\Program Files\Git\git-bash.exe"
         full_proxy2_command = f'"{git_bash_path}" {script_path}'
-        proxy2_command = f'ssh -o "ProxyCommand connect -S 127.0.0.1:{dp1} %h %p" -D {dp2} -p {port1} root@{host1}'
 
         print(f"已启动第二个代理: {full_proxy2_command}")
+        if identity_file:
+            print(f"第二个代理使用本地密钥: {identity_file}")
 
         process = subprocess.Popen(
             full_proxy2_command,
@@ -303,13 +318,24 @@ def start_second_proxy(host1, port1, dp1=20808, dp2=20809):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='创建双层SSH动态代理')
+    parser = argparse.ArgumentParser(
+        description='创建双层SSH动态代理',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=(
+            '示例:\n'
+            '  python twin_dynamic_proxy_script.py tcp://host:port host1\n'
+            '  python twin_dynamic_proxy_script.py tcp://host:port host1 --port1 22 --dp1 8888 --dp2 8889\n'
+            '  python twin_dynamic_proxy_script.py tcp://host:port host1 --identity1 ~/.ssh/id_rsa --identity2 ~/.ssh/id_rsa2\n'
+        )
+    )
     parser.add_argument('public_url', help='公网地址，格式: tcp://host:port')
     parser.add_argument('host1', nargs='?', help='第二个代理的目标主机地址（可选，未提供时从配置文件读取或提示输入）')
     parser.add_argument('--port1', type=int, help='第二个代理的目标端口（可选，未提供时从配置文件读取或使用默认值22）',
                         default=None)
     parser.add_argument('--dp1', type=int, help='第一个代理的本地监听端口，默认20808', default=20808)
     parser.add_argument('--dp2', type=int, help='第二个代理的本地监听端口，默认20809', default=20809)
+    parser.add_argument('--identity1', '--i1', help='第一个代理（cpolar隧道）的SSH私钥路径')
+    parser.add_argument('--identity2', '--i2', help='第二个代理（目标主机）的SSH私钥路径')
     args = parser.parse_args()
 
     host, port = parse_tcp_url(args.public_url)
@@ -349,12 +375,17 @@ if __name__ == "__main__":
 
     dp1 = args.dp1
     dp2 = args.dp2
+    identity1 = args.identity1
+    identity2 = args.identity2
+
+    identity1_opt = build_identity_option(identity1)
+    identity2_opt = build_identity_option(identity2)
 
     proxy1_command = f'-D {dp1} -p {port} root@{host}'
-    full_proxy1_command = f'ssh -o StrictHostKeyChecking=no -N -D {dp1} -p {port} root@{host}'
+    full_proxy1_command = f'ssh -o StrictHostKeyChecking=no {identity1_opt}-N -D {dp1} -p {port} root@{host}'
 
     print("正在启动第一个代理...")
-    proxy1 = start_ssh_proxy(proxy1_command, is_first_proxy=True, dp1=dp1)
+    proxy1 = start_ssh_proxy(proxy1_command, is_first_proxy=True, dp1=dp1, identity_file=identity1)
 
     if proxy1:
         import time
@@ -363,7 +394,7 @@ if __name__ == "__main__":
         time.sleep(5)
 
         print("\n正在启动第二个代理...")
-        proxy2, full_proxy2_command = start_second_proxy(host1, port1, dp1=dp1, dp2=dp2)
+        proxy2, full_proxy2_command = start_second_proxy(host1, port1, dp1=dp1, dp2=dp2, identity_file=identity2)
 
         if proxy2:
             print("\n所有代理已成功启动!")
