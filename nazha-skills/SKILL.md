@@ -1,3 +1,13 @@
+---
+name: nazha-skills
+version: 1.0.0
+author: local
+homepage: https://github.com/
+skills: []
+description: 哪吒监控（Nezha）技能：登录哪吒监控平台，通过 API 完成登录认证和服务器列表查询。
+  触发条件：当用户需要查询哪吒监控、登录哪吒、查看服务器清单、获取 Nezha 服务器状态时调用。
+---
+
 # 哪吒监控 (Nezha) 技能
 
 ## 技能概述

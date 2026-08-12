@@ -1,5 +1,9 @@
 ---
 name: scop-report
+version: 1.0.0
+author: local
+homepage: https://github.com/
+skills: []
 description: 黑鸭子扫描报告。从 SCOP 平台 (scop.iwhalecloud.com) 提取软件组成分析数据，结合外部 CVE 情报生成综合扫描报告。
   触发场景：用户要求生成黑鸭子扫描报告、SCOP 报告、组件安全扫描报告、组件漏洞报告。
 ---

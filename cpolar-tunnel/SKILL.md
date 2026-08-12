@@ -1,8 +1,10 @@
 ---
 name: cpolar-tunnel
 version: 1.0.0
-description: |
-  通过cpolar隧道创建SSH代理，支持单层和双层代理链。通过登录cpolar仪表盘获取SSH隧道公网地址，创建动态代理实现网络穿透。
+author: local
+homepage: https://github.com/
+skills: []
+description: 通过cpolar隧道创建SSH代理，支持单层和双层代理链。通过登录cpolar仪表盘获取SSH隧道公网地址，创建动态代理实现网络穿透。
   触发条件：当用户需要查看隧道状态、获取SSH隧道URL、创建单层或双层代理连接时调用。
 ---
 

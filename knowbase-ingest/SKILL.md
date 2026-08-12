@@ -1,5 +1,9 @@
 ---
 name: knowbase-ingest
+version: 1.0.0
+author: local
+homepage: https://github.com/
+skills: []
 description: >
   Ingest a source document into a Karpathy-style personal knowledge base:
   copy to raw/, extract content, create a wiki page with internal links,

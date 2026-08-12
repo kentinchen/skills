@@ -1,8 +1,10 @@
 ---
 name: dddd-ocr
 version: 1.0.0
-description: |
-  调用ddddocr-fastapi服务进行验证码识别、滑动验证码匹配和目标检测。
+author: local
+homepage: https://github.com/
+skills: []
+description: 调用ddddocr-fastapi服务进行验证码识别、滑动验证码匹配和目标检测。
   触发条件：当用户需要识别验证码图片、处理滑动验证码、检测图片目标时调用。
 ---
 

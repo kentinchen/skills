@@ -1,8 +1,10 @@
 ---
 name: yw-services
 version: 1.1.0
-description: |
-  云网系统综合服务，支持SSO登录、APP token换取、查询待办工单、系统清单等功能。
+author: local
+homepage: https://github.com/
+skills: []
+description: 云网系统综合服务，支持SSO登录、APP token换取、查询待办工单、系统清单等功能。
   触发条件：当用户需要登录yw系统或查询云网系统的工单、系统清单等信息时调用。
 ---
 

@@ -1,8 +1,10 @@
 ---
 name: yg-services
 version: 2.0.0
-description: |
-  云管系统综合服务，支持查询通知清单、工单、监控、资源、文件、账单、客户等功能。
+author: local
+homepage: https://github.com/
+skills: []
+description: 云管系统综合服务，支持查询通知清单、工单、监控、资源、文件、账单、客户等功能。
   触发条件：当用户需要查询yg系统或云管系统的通知、工单、监控、资源、文件、账单或客户信息时调用。
 ---
 

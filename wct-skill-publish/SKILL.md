@@ -1,5 +1,9 @@
 ---
 name: wct-skill-publish
+version: 1.0.0
+author: local
+homepage: https://github.com/
+skills: []
 description: WCT 技能市场发布。通过 API 将 skill 发布到 dc.iwhalecloud.com 技能市场，支持新建发布和版本更新。
   触发场景：发布 skill 到 WCT 市场、更新 WCT 技能、上传技能到 dc.iwhalecloud.com。
 ---

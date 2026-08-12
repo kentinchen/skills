@@ -1,10 +1,11 @@
 ---
 name: zcm-task-add-comment
 version: 1.0.0
-description: |
-  为浩鲸研发云单子添加评论。
-  触发条件：当用户需要给研发云的单子（需求、任务、缺陷等所有研发云的单子）添加评论时调用
-
+author: local
+homepage: https://github.com/
+skills: []
+description: 为浩鲸研发云单子添加评论。
+  触发条件：当用户需要给研发云的单子（需求、任务、缺陷等所有研发云的单子）添加评论时调用。
 ---
 
 # 执行步骤

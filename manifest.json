@@ -1,0 +1,90 @@
+{
+  "id": "local-skills-bundle",
+  "name": "Local Skills Bundle",
+  "version": "1.0.0",
+  "publisher": "local",
+  "description": "一键安装 9 个本地常用技能（cpolar-tunnel / dddd-ocr / knowbase-ingest / nazha-skills / scop-report / wct-skill-publish / yg-services / yw-services / zcm-task-add-comment）到 TraeWork / TraeCode 全局技能目录。",
+  "license": "MIT",
+  "engines": {
+    "trae": "*",
+    "traework": "*",
+    "traecode": "*"
+  },
+  "homepage": "https://github.com/",
+  "repository": "file:///d:/project/skills",
+  "categories": ["productivity", "devops", "enterprise"],
+  "tags": ["cpolar", "ocr", "knowbase", "nezha", "scop", "yg", "yw", "wct", "zcm"],
+  "installModes": ["global", "project"],
+  "skillDirs": [
+    "cpolar-tunnel",
+    "dddd-ocr",
+    "knowbase-ingest",
+    "nazha-skills",
+    "scop-report",
+    "wct-skill-publish",
+    "yg-skills",
+    "yw-skills",
+    "zcm-task-add-comment"
+  ],
+  "skills": [
+    {
+      "name": "cpolar-tunnel",
+      "version": "1.0.0",
+      "folder": "cpolar-tunnel",
+      "summary": "通过 cpolar 隧道创建 SSH 代理，支持单层/双层代理链"
+    },
+    {
+      "name": "dddd-ocr",
+      "version": "1.0.0",
+      "folder": "dddd-ocr",
+      "summary": "调用 ddddocr-fastapi 进行验证码识别、滑动匹配与目标检测"
+    },
+    {
+      "name": "knowbase-ingest",
+      "version": "1.0.0",
+      "folder": "knowbase-ingest",
+      "summary": "Karpathy 风格个人知识库 ingest 流水线 (raw/ -> wiki/ -> INDEX)"
+    },
+    {
+      "name": "nazha-skills",
+      "version": "1.0.0",
+      "folder": "nazha-skills",
+      "summary": "哪吒监控 (Nezha) 登录与服务器查询 API 封装"
+    },
+    {
+      "name": "scop-report",
+      "version": "1.0.0",
+      "folder": "scop-report",
+      "summary": "黑鸭子 / SCOP 平台组件扫描 + 外部 CVE 情报综合报告"
+    },
+    {
+      "name": "wct-skill-publish",
+      "version": "1.0.0",
+      "folder": "wct-skill-publish",
+      "summary": "WCT 技能市场 (dc.iwhalecloud.com) 一键发布与版本更新"
+    },
+    {
+      "name": "yg-services",
+      "version": "2.0.0",
+      "folder": "yg-skills",
+      "summary": "云管系统 (YG) 通知/工单/监控/资源/文件/账单/客户 查询"
+    },
+    {
+      "name": "yw-services",
+      "version": "1.1.0",
+      "folder": "yw-skills",
+      "summary": "云网系统 (YW) SSO 登录、APP token、工单、系统清单"
+    },
+    {
+      "name": "zcm-task-add-comment",
+      "version": "1.0.0",
+      "folder": "zcm-task-add-comment",
+      "summary": "浩鲸研发云 (ZCM) 需求/任务/缺陷 单子添加评论"
+    }
+  ],
+  "files": {
+    "windows": ["install.ps1", "link-skills.ps1"],
+    "unix": ["install.sh", "link-skills.sh"],
+    "docs": ["README.md", "AGENTS.md"]
+  }
+}
