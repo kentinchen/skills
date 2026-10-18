@@ -57,6 +57,32 @@ description: "极空间(zconnect.cn)NAS巡检日报/签到表/交班表检查与
 ✅ 其余 2 张已在窗口内上传
 ```
 
+### ⚠️ 关键：不要截断脚本输出
+
+`--list` 脚本返回的是 **按修改时间倒序** 的结果，**不是按日期分组**。使用 `tail -N` 截断输出会遗漏目标日期的文件（它们可能散落在列表中间）。
+
+**正确做法**：获取完整输出，用 Python 按日期过滤：
+```python
+import subprocess, re
+result = subprocess.run([
+    'python', 'D:/projects/skills/jkj-skills/scripts/upload_xunjian.py',
+    '--list', '/巡检日报/202610'
+], capture_output=True, text=True)
+
+# 过滤目标日期
+target_date = '20261018'  # 例如今天
+files = {}
+for line in result.stdout.strip().split('\n'):
+    match = re.search(r'(\d+)-(\d+)', line)
+    if match:
+        date_str = match.group(1)
+        if date_str == target_date:
+            name = line.split()[0]
+            files[name] = line
+```
+
+**错误做法**：`python ... --list ... | tail -30`（会误报缺失）
+
 ## 四、功能二：上传文件到对应目录
 
 ### 首选方式：常驻脚本（API直传，已实测）
