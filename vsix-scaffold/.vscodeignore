@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+*.vsix
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Python cache (shouldn't be in skills/ but just in case)
+__pycache__/
+*.pyc
+*.pyo

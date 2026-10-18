@@ -1,0 +1,32 @@
+{
+  "name": "local-skills-bundle",
+  "displayName": "Local Skills Bundle",
+  "description": "9 local skills (cpolar, ddddocr, knowbase-ingest, nezha, scop, wct, yg, yw, zcm) with one-click install to project .trae/skills on open.",
+  "version": "1.0.0",
+  "publisher": "local",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other"],
+  "keywords": ["trae", "skills", "cpolar", "ocr", "nezha", "scop", "yg", "yw", "wct", "zcm"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "localSkillsBundle.installToWorkspace",
+        "title": "Skills Bundle: Install to Current Workspace (.trae/skills)"
+      },
+      {
+        "command": "localSkillsBundle.updateFromRepo",
+        "title": "Skills Bundle: Update from Local Repo"
+      }
+    ]
+  },
+  "scripts": {
+    "package": "vsce package --out local-skills-bundle-1.0.0.vsix",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.0.0"
+  }
+}
