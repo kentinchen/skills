@@ -4,3 +4,8 @@
 
 # 敏感配置文件
 /nazha-skills/config/nazha_config.json
+/.venv
+/.idea
+/.idea
+/vsix-scaffold/node_modules
+/vsix-scaffold/skills
